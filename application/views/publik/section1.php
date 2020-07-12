@@ -31,8 +31,16 @@
                 </div>
                 <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                     <ul class="list-group text-left m-3">
-                        <li class="list-group-item">S1-2020-397022-tableofcontent.pdf
-                            <a href="#"> <i class="fas fa-fw fa-download"></i></a> </li>
+                        <?php foreach ($file as $files) :
+                        ?>
+                            <li class="list-group-item">
+                                <?php
+                                echo $files['name'];
+                                ?>
+                                <a href="<?php echo base_url('publik/download/') .  $files['name']; ?>"> <i class=" fas fa-fw fa-download"></i></a>
+                            </li>
+                        <?php endforeach;
+                        ?>
                         <li class="list-group-item">S1-2020-397022-abstract.pdf
                             <i class="fas fa-fw fa-download"></i></li>
                         <li class="list-group-item">S1-2020-397022-title.pdf

@@ -45,13 +45,19 @@
      <div class="sidebar-heading">
        Setting
      </div>
-
-
-     <!-- Nav Item - Charts -->
+     <!-- Nav Item - Pages Collapse Menu -->
      <li class="nav-item">
-       <a class="nav-link" href="<?= base_url('admin/data_user'); ?>">
-         <i class="fas fa-fw fa-users"></i>
-         <span>Setting User</span></a>
+       <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+         <i class="fas fa-fw fa-cog"></i>
+         <span>Seeting Users</span>
+       </a>
+       <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+         <div class="bg-white py-2 collapse-inner rounded">
+           <h6 class="collapse-header">Users:</h6>
+           <a class="collapse-item" href="<?= base_url('admin/data_userMhs'); ?>">Mahasiswa</a>
+           <a class="collapse-item" href="<?= base_url('admin/data_userAdmin'); ?>">Administrator</a>
+         </div>
+       </div>
      </li>
 
 

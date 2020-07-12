@@ -12,7 +12,10 @@ class M_mahasiswa extends CI_Model
     {
         return $this->db->get('mahasiswa');
     }
-
+    public function get_data($table)
+    {
+        return $this->db->get($table);
+    }
     public function input_data($data, $table)
     {
         $this->db->insert($table, $data);
@@ -52,16 +55,27 @@ class M_mahasiswa extends CI_Model
             return $return;
         }
     }
-
+    //menyimpan id tugas akhir sementara
+    public function get_id()
+    {
+        $data['user'] = $this->db->get_where('user', ['id' => $this->session->userdata('id')])->row_array();
+        //memanggil tugas_akhir yang user_id==this session
+        //  $data['tugas_akhir'] = $this->db->get_where('tugas_akhir', ['user_id' => $this->session->userdata('id')])->row_array();
+        //mengambil id tugas akhir
+        $q = $this->db->select('id')->from('tugas_akhir')->where('user_id', $this->session->userdata('id'))->get()->result_array();
+        //array shift untuk memanggil single array yaitu id
+        return array_shift($q);
+    }
     // Fungsi untuk menyimpan data ke database
     public function save($upload)
     {
-        $file            = $_FILES['file'];
+        $file = $this->get_id();
         $data = array(
 
             'name' => $upload['file']['file_name'],
-            'file' => $file,
+            'file' => "none",
             'status' => 1,
+            'ta_id' => $file['id'],
             'user_id' => $this->session->userdata('id')
         );
 

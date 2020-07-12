@@ -7,6 +7,7 @@ class Admin extends CI_Controller
 		parent::__construct();
 		$this->load->database();
 		$this->load->library('session');
+		$this->load->helper("customhelper");
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 		$data['user'] = $this->db->get_where('user', ['id' => $this->session->userdata('id')])->row_array();
 	}
@@ -33,45 +34,60 @@ class Admin extends CI_Controller
 	{
 		return $this->m_admin->get_status_ta($status_id);
 	}
-	public function data_user()
+
+	public function data_userMhs()
 	{
 		$data['title'] = 'Administrator';
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
+		$data['userMhs'] = $this->m_admin->show_userMhs();
 		$this->load->view('admin/header.php', $data);
 		$this->load->view('admin/sidebar.php');
-		$this->load->view('admin/data_user.php');
+		$this->load->view('admin/data_userMhs.php');
 		$this->load->view('admin/footer');
 	}
-	public function uploadFile()
+	public function data_userAdmin()
 	{
-		$judul			= $this->input->post('judul');
-		$penulis		= $this->input->post('penulis');
-		$pembimbing		= $this->input->post('pembimbing');
-		$file			= $_FILES['file'];
+		$data['title'] = 'Administrator';
+		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
+		$data['userAdmin'] = $this->m_admin->show_userAdmin();
+		$this->load->view('admin/header.php', $data);
+		$this->load->view('admin/sidebar.php');
+		$this->load->view('admin/data_userAdmin.php');
+		$this->load->view('admin/footer');
+	}
 
-		if ($file = '') {
-		} else {
-			$config['upload_path']		= './assets/file';
-			$config['allowed_types']	= 'pdf';
-			$this->load->library('upload', $config);
-			if (!$this->upload->do_upload('file')) {
+	public function get_detail($id)
+	{
+		$data = array();
+		$data['title'] = 'Administrator';
+		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
+		$data['ta_mhs'] = $this->m_admin->show_tugas_akhir();
+		$data['file'] = $this->m_admin->get_file($id);
+		$data['ta'] = $this->m_admin->show_detail($id);
+		$this->load->view('admin/header.php', $data);
+		$this->load->view('admin/sidebar.php');
+		$this->load->view('admin/detail_ta.php');
+		$this->load->view('admin/footer');
+	}
 
-				echo "upload gagal";
-				die();
-			} else {
-				$file = $this->upload->data('file_name');
-				return "upload success";
-			}
-		}
+	public function add_user()
+	{
+		$username = $this->input->post('username');
+		$password = $this->input->post('password');
+		$role_id = $this->input->post('role');
 		$data = array(
-			'judul'      => $judul,
-			'penulis'	 => $penulis,
-			'pembimbing' => $pembimbing,
-			'file'		=> $file
+			'username'      => $username,
+			'role_id'  => $role_id,
+			'password'  => $password,
+			'is_active'  => 1,
 		);
-
-
-		$this->m_file->input_data($data, 'tb_file');
-		redirect('Admin/index');
+		$this->m_admin->input_data($data, 'user');
+		redirectPreviousPage();
+	}
+	public function delete($id)
+	{
+		$where = array('id' => $id);
+		$this->m_admin->hapus_data($where, 'user');
+		redirectPreviousPage();
 	}
 }

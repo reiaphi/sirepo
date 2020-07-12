@@ -66,7 +66,12 @@ class Mahasiswa extends CI_Controller
             'user_id' => $this->session->userdata('id')
 
         );
-        $this->m_mahasiswa->input_data($data, 'mahasiswa');
+        if (!$data) {
+
+            $this->m_mahasiswa->input_data($data, 'mahasiswa');
+        } else {
+            echo "data sudah ada";
+        }
 
         redirect('mahasiswa');
     }
@@ -98,7 +103,6 @@ class Mahasiswa extends CI_Controller
     public function insert_to_file_laporan()
     {
         $data = array();
-
         if ($this->input->post('submit')) { // Jika user menekan tombol Submit (Simpan) pada form
             // lakukan upload file dengan memanggil function upload yang ada di GambarModel.php
             $upload = $this->m_mahasiswa->upload();

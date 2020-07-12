@@ -42,9 +42,16 @@
                                             <td><?php echo $data->nim; ?></td>
                                             <td><?php echo $data->name; ?></td>
                                             <td><?php echo $data->judul; ?></td>
-                                            <td><?php echo base_url('Admin/cek_status/') . $data->status_id; ?></td>
+                                            <td><?php if ($data->status_id = 1) {
+                                                    echo "upload";
+                                                } elseif ($data->status_id = 2) {
+                                                    echo "pending";
+                                                } elseif ($data->status_id = 3) {
+                                                    echo "published";
+                                                } ?> </td>
                                             <td>
-                                                <a href="#" class="btn btn-info p-1">
+                                                <?php echo $data->user_id; ?>
+                                                <a href="<?= base_url('admin/get_detail/' . $data->user_id); ?>" class="btn btn-info p-1">
 
                                                     <span class="text">Detail</span>
                                                 </a>

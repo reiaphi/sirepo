@@ -49,13 +49,13 @@ class Auth extends CI_Controller
                     //cek role user
                     redirect('user');
                 } else {
-                    redirect('auth');
+                    $this->index();
                 }
             } else {
-                redirect('auth');
+                $this->index();
             }
         } else {
-            redirect('auth');
+            $this->index();
         }
     }
     public function logout()
