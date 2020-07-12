@@ -37,6 +37,12 @@ class Publik extends CI_Controller
         $this->load->view('publik/section1.php', $data);
         $this->load->view('publik/footer.php');
     }
+    public function demo($id)
+    {
+        //$where = array('user_id' => $this->session->userdata('id'));
+        $data['file_aplikasi'] = $this->m_publik->get_file_aplikasi($id);
+        $this->load->view('publik/demo.php', $data);
+    }
     public function get_filename($id)
     {
         $data['files'] = $this->db->select('name')->from('file')->where('ta_id', $id)->get()->result_array();

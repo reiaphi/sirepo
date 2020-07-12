@@ -186,24 +186,35 @@
                     </a>
                     <!-- Card Content - Collapse -->
                     <div class="collapse" id="collapseCardThree" data-parent="#accordion">
-                        <div class="row card-body">
-                            <div class="row">
-                                <div class="col">
-                                    <div style="color: red;"><?php echo (isset($message)) ? $message : ""; ?></div>
-                                    <?php echo form_open("mahasiswa/insert_to_file_laporan", array('enctype' => 'multipart/form-data')); ?>
-                                    <input type="file" name="input_file" class="form-control"></input>
-                                    <input type="submit" name="submit" value="Simpan">
-                                    <?php echo form_close(); ?>
-                                </div>
-                                <div class="col">
+                        <div class="row card-body form-inline">
+                            <div style="color: red;"><?php echo (isset($message)) ? $message : ""; ?></div>
+                            <?php echo form_open("mahasiswa/insert_to_file_laporan", array('enctype' => 'multipart/form-data')); ?>
+                            <input type="file" name="input_file" class="form-control"></input>
+                            <input type="submit" name="submit" value="Simpan">
+                            <?php echo form_close(); ?>
+                        </div>
+                    </div>
+                </div>
 
-                                </div>
-                            </div>
-                            <div class="row">
-
-                            </div>
-                            <!-- Menampilkan Error jika validasi tidak valid -->
-
+            </div>
+            <!-- Collapsable Card Example -->
+            <div class="widget-timeline-item">
+                <div class="widget-timeline-info">
+                    <div class="widget-timeline-icon bg-warning"><b>4</b></div>
+                </div>
+                <div class="card shadow mb-4">
+                    <!-- Card Header - Accordion -->
+                    <a href="#collapseCard4" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseCard4">
+                        <h6 class="m-0 font-weight-bold text-info">Unggah File Aplikasi</h6>
+                    </a>
+                    <!-- Card Content - Collapse -->
+                    <div class="collapse" id="collapseCard4" data-parent="#accordion">
+                        <div class="row card-body form-inline">
+                            <div style="color: red;"><?php echo (isset($message)) ? $message : ""; ?></div>
+                            <?php echo form_open("mahasiswa/insert_to_file_aplikasi", array('enctype' => 'multipart/form-data')); ?>
+                            <input type="file" name="input_file" class="form-control"></input>
+                            <input type="submit" name="submit" value="Simpan">
+                            <?php echo form_close(); ?>
                         </div>
                     </div>
                 </div>
@@ -213,6 +224,9 @@
 
     </div>
 </div>
+
+</div>
+
 
 
 

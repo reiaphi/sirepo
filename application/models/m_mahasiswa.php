@@ -57,6 +57,24 @@ class M_mahasiswa extends CI_Model
             return $return;
         }
     }
+    public function upload_zip()
+    {
+        $config['upload_path'] = './uploads/file_aplikasi/';
+        $config['allowed_types'] = 'zip|rar';
+        $config['max_size']  = '20480';
+        $config['remove_space'] = TRUE;
+
+        $this->load->library('upload', $config); // Load konfigurasi uploadnya
+        if ($this->upload->do_upload('input_file')) { // Lakukan upload dan Cek jika proses upload berhasil
+            // Jika berhasil :
+            $return = array('result' => 'success', 'file' => $this->upload->data(), 'error' => '');
+            return $return;
+        } else {
+            // Jika gagal :
+            $return = array('result' => 'failed', 'file' => '', 'error' => $this->upload->display_errors());
+            return $return;
+        }
+    }
     //menyimpan id tugas akhir sementara
     public function get_id()
     {
@@ -82,5 +100,19 @@ class M_mahasiswa extends CI_Model
         );
 
         $this->db->insert('file', $data);
+    }
+    public function save_zip($upload)
+    {
+        $file = $this->get_id();
+        $data = array(
+
+            'name' => $upload['file']['file_name'],
+            'file' => "none",
+            'status' => 1,
+            'ta_id' => $file['id'],
+            'user_id' => $this->session->userdata('id')
+        );
+
+        $this->db->insert('file_aplikasi', $data);
     }
 }

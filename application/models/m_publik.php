@@ -15,6 +15,12 @@ class M_publik extends CI_Model
     {
         return $this->db->get_where('file', ['ta_id' => $id])->result_array();
     }
+    public function get_file_aplikasi($id)
+    {
+        $query = $this->db->get_where('file_aplikasi', ['ta_id' => $id])->row();
+        var_dump($query);
+        return $query;
+    }
 
     function getRows($params = array())
     {

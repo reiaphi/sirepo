@@ -9,6 +9,7 @@ class Mahasiswa extends CI_Controller
         $this->load->database();
         $this->load->library('session');
         $this->load->model('m_mahasiswa');
+        $this->load->helper("customhelper");
         $data['user'] = $this->db->get_where('user', ['id' => $this->session->userdata('id')])->row_array();
     }
     public function index()
@@ -93,7 +94,7 @@ class Mahasiswa extends CI_Controller
             echo "data sudah ada";
         }
 
-        redirect('mahasiswa');
+        redirectPreviousPage();
     }
     public function insert_to_tugas_akhir()
     {
@@ -118,7 +119,7 @@ class Mahasiswa extends CI_Controller
         );
         $this->m_mahasiswa->input_data($data, 'tugas_akhir');
 
-        redirect('mahasiswa');
+        redirectPreviousPage();
     }
     public function insert_to_file_laporan()
     {
@@ -129,7 +130,7 @@ class Mahasiswa extends CI_Controller
 
             if ($upload['result'] == "success") { // Jika proses upload sukses
                 // Panggil function save yang ada di GambarModel.php untuk menyimpan data ke database
-                $this->m_mahasiswa->save($upload);
+                $this->m_mahasiswa->save($upload, 'file');
 
                 redirect('mahasiswa'); // Redirect kembali ke halaman awal / halaman view data
             } else { // Jika proses upload gagal
@@ -137,6 +138,21 @@ class Mahasiswa extends CI_Controller
             }
         }
 
-        redirect('mahasiswa');
+        redirectPreviousPage();
+    }
+    public function insert_to_file_aplikasi()
+    {
+        $data = array();
+        if ($this->input->post('submit')) { // Jika user menekan tombol Submit (Simpan) pada form
+            $upload = $this->m_mahasiswa->upload_zip();
+            if ($upload['result'] == "success") { // Jika proses upload sukses
+                $this->m_mahasiswa->save_zip($upload, 'file_aplikasi');
+                redirectPreviousPage();
+            } else { // Jika proses upload gagal
+                $data['message'] = $upload['error']; // Ambil pesan error uploadnya untuk dikirim ke file form dan ditampilkan
+            }
+        }
+
+        redirectPreviousPage();
     }
 }
