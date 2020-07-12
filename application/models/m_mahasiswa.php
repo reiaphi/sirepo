@@ -8,10 +8,7 @@ class M_mahasiswa extends CI_Model
         $this->load->library('session');
         $data['user'] = $this->db->get_where('user', ['id' => $this->session->userdata('id')])->row_array();
     }
-    public function show_data()
-    {
-        return $this->db->get('mahasiswa');
-    }
+
     public function get_data($table)
     {
         return $this->db->get($table);
@@ -34,6 +31,11 @@ class M_mahasiswa extends CI_Model
     {
         $this->db->where($where);
         $this->db->update($table, $data);
+    }
+
+    public function get_file($id)
+    {
+        return $this->db->get_where('file', ['ta_id' => $id])->result_array();
     }
 
     // Fungsi untuk melakukan proses upload file

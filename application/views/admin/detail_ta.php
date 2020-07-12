@@ -51,7 +51,6 @@
                             <?php
                             echo $files['name'];
                             ?>
-                            <a href="<?php echo base_url('publik/download/') .  $files['name']; ?>"> <i class=" fas fa-fw fa-download"></i></a>
                         </li>
                     <?php endforeach;
                     ?>
@@ -72,9 +71,6 @@
                         </span>
                     </a>
                 </div>
-
-
             </div>
-
         </div>
     </div>

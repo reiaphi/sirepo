@@ -56,7 +56,7 @@
 
                                         <select class="custom-select mr-sm-2" id="program_studi" name="program_studi">
                                             <option selected>Choose...</option>
-                                            <option value="Komputer dan Sistem Informasi">Komputer dan Sistem Informasi</option>
+                                            <option value="D3 Komputer dan Sistem Informasi">Komputer dan Sistem Informasi</option>
 
                                         </select>
                                     </div>

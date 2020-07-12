@@ -9,6 +9,7 @@ class Mahasiswa extends CI_Controller
         $this->load->database();
         $this->load->library('session');
         $this->load->model('m_mahasiswa');
+        $data['user'] = $this->db->get_where('user', ['id' => $this->session->userdata('id')])->row_array();
     }
     public function index()
     {
@@ -31,20 +32,39 @@ class Mahasiswa extends CI_Controller
         $this->load->view('mahasiswa/my_profile.php');
         $this->load->view('mahasiswa/footer');
     }
+
     public function tugas_akhir_saya()
     {
+        $data = array();
         $data['title'] = 'Mahasiswa';
         $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
+        $data['ta_saya'] = $this->get_ta_saya();
+        $data['penulis'] = $this->get_nama_mahasiswa();
+        $data['file'] = $this->get_file();
         $this->load->view('mahasiswa/header.php', $data);
         $this->load->view('mahasiswa/sidebar.php');
-        $this->load->view('mahasiswa/tugas_akhir_saya.php');
-
+        $this->load->view('mahasiswa/tugas_akhir_saya.php', $data);
         $this->load->view('mahasiswa/footer');
     }
-
+    private function get_ta_saya()
+    {
+        $query = $this->db->get_where('tugas_akhir', ['user_id' => $this->session->userdata('id')])->row();
+        return $query;
+    }
+    private function get_nama_mahasiswa()
+    {
+        $this->db->select('*');
+        $query = $this->db->get_where('mahasiswa', ['user_id' => $this->session->userdata('id')])->row();
+        return $query;
+    }
+    private function get_file()
+    {
+        $this->db->select('*');
+        $query = $this->db->get_where('file', ['user_id' => $this->session->userdata('id')])->result_array();
+        return $query;
+    }
     public function insert_to_mahasiswa()
     {
-
         $data['user'] = $this->db->get_where('user', ['id' => $this->session->userdata('id')])->row_array();
         $nim = $this->input->post('nim');
         $name = $this->input->post('name');

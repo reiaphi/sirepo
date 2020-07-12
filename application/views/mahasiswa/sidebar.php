@@ -29,9 +29,9 @@
 
      <!-- Nav Item - Pages Collapse Menu -->
      <li class="nav-item">
-       <a class="nav-link collapsed" href="<?= base_url('mahasiswa/tugas_akhir_saya'); ?> ">
+       <a class="nav-link collapsed" href="<?= base_url('mahasiswa/tugas_akhir_saya/'); ?> ">
          <i class="fas fa-fw fa-cog"></i>
-         <span>Tugas Akhir</span>
+         <span>Tugas Akhir Saya</span>
        </a>
 
        <!-- Divider -->
