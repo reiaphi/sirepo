@@ -81,4 +81,8 @@ class M_admin extends CI_Model
     {
         return $this->db->get_where('file', ['user_id' => $id])->result_array();
     }
+    public function get_mhs($id)
+    {
+        return $this->db->get_where('mahasiswa', ['user_id' => $id])->row();
+    }
 }

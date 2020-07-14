@@ -2,9 +2,9 @@
     <div class="row my-4">
         <div class="col">
 
-            <h3 class="title"><?php echo $tugas_akhir->judul; ?></h3>
-            <p><strong><?php echo $tugas_akhir->pembimbing; ?></p>
-            2020 | Tugas Akhir | D3 Ilmu Komputer</strong>
+            <h3 class="title"><?php echo $tugas_akhir[0]['judul']; ?></h3>
+            <p><strong><?php echo $tugas_akhir[0]['name']; ?>,<?php echo $tugas_akhir[0]['pembimbing']; ?> </p>
+            <?php echo $tugas_akhir[0]['tahun']; ?>| Tugas Akhir | D3 <?php echo $tugas_akhir[0]['program_studi']; ?></strong>
         </div>
 
     </div>
@@ -25,9 +25,9 @@
             <div class="tab-content" id="myTabContent">
 
                 <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                    <p class="text-justify font-weight-light"><?php echo $tugas_akhir->intisari; ?></p>
-                    <p class="text-justify font-weight-light"><em><?php echo $tugas_akhir->abstract; ?></em></p>
-                    <p class="font-weight-bold">Kata Kunci : <?php echo $tugas_akhir->kata_kunci; ?></p>
+                    <p class="text-justify font-weight-light"><?php echo $tugas_akhir[0]['intisari']; ?></p>
+                    <p class="text-justify font-weight-light"><em><?php echo $tugas_akhir[0]['abstract']; ?></em></p>
+                    <p class="font-weight-bold">Kata Kunci : <?php echo $tugas_akhir[0]['kata_kunci']; ?></p>
                 </div>
                 <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                     <ul class="list-group text-left m-3">
@@ -41,18 +41,12 @@
                             </li>
                         <?php endforeach;
                         ?>
-                        <li class="list-group-item">S1-2020-397022-abstract.pdf
-                            <i class="fas fa-fw fa-download"></i></li>
-                        <li class="list-group-item">S1-2020-397022-title.pdf
-                            <i class="fas fa-fw fa-download"></i> </li>
-                        <li class="list-group-item">S1-2020-397022-bibliography.pdf
-                            <i class="fas fa-fw fa-download"></i>
-                        </li>
+
                     </ul>
                 </div>
                 <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
                     <div class="mx-auto my-5" style="width: 200px;">
-                        <a class="btn btn-danger" href="<?= base_url('publik/demo/') . $tugas_akhir->id; ?>">Demo Aplikasi</a>
+                        <a class="btn btn-danger" href="<?= base_url('publik/demo/') . $tugas_akhir[0]['id']; ?>">Demo Aplikasi</a>
                     </div>
                 </div>
             </div>

@@ -64,6 +64,7 @@ class Admin extends CI_Controller
 		$data['ta_mhs'] = $this->m_admin->show_tugas_akhir();
 		$data['file'] = $this->m_admin->get_file($id);
 		$data['ta'] = $this->m_admin->show_detail($id);
+		$data['mahasiswa'] = $this->m_admin->get_mhs($id);
 		$this->load->view('admin/header.php', $data);
 		$this->load->view('admin/sidebar.php');
 		$this->load->view('admin/detail_ta.php');

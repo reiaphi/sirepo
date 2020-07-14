@@ -20,30 +20,30 @@
                     <!-- Card Content - Collapse -->
                     <div class="collapse" id="collapseCardOne" data-parent="#accordion">
                         <div class="card-body">
-                            <form action="<?= base_url() . 'mahasiswa/insert_to_mahasiswa'; ?>" method="POST">
+                            <form id="yourFormId" name="yourFormId" action="<?= base_url() . 'mahasiswa/insert_to_mahasiswa'; ?>" method="POST">
                                 <div class="form-group row">
                                     <label for="nim" class="col-sm-2 col-form-label">NIM</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="nim" name="nim" placeholder="NIM Lengkap">
+                                        <input type="text" class="form-control" id="nim" name="nim" placeholder="NIM Lengkap" value="<?php echo $mahasiswa->nim; ?>">
                                     </div>
                                 </div>
-                                <div class="form-group row">
+                                <div class=" form-group row">
                                     <label for="name" class="col-sm-2 col-form-label">Nama Lengkap</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="name" name="name" placeholder="Nama lengkap">
+                                        <input type="text" class="form-control" id="name" name="name" placeholder="Nama lengkap" value="<?php echo $mahasiswa->name; ?>">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="email" class="col-sm-2 col-form-label">Email</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="email" name="email" placeholder="example@gmail.com">
+                                        <input type="text" class="form-control" id="email" name="email" placeholder="example@gmail.com" value="<?php echo $mahasiswa->email; ?>">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="fakultas" class="col-sm-2 col-form-label">Fakultas</label>
                                     <div class="col-sm-10">
 
-                                        <select class="custom-select mr-sm-2" id="fakultas" name="fakultas">
+                                        <select class="custom-select mr-sm-2" id="fakultas" name="fakultas" value="<?php echo $mahasiswa->fakultas; ?>">
                                             <option selected>Choose...</option>
                                             <option value="Sekolah Vokasi">Sekolah Vokasi</option>
 
@@ -54,7 +54,7 @@
                                     <label for="program_studi" class="col-sm-2 col-form-label">Program Studi</label>
                                     <div class="col-sm-10">
 
-                                        <select class="custom-select mr-sm-2" id="program_studi" name="program_studi">
+                                        <select class="custom-select mr-sm-2" id="program_studi" name="program_studi" value="<?php echo $mahasiswa->program_studi; ?>">
                                             <option selected>Choose...</option>
                                             <option value="D3 Komputer dan Sistem Informasi">Komputer dan Sistem Informasi</option>
 
@@ -64,13 +64,13 @@
                                 <div class="form-group row">
                                     <label for="no_hp" class="col-sm-2 col-form-label">No. HP</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="no_hp" name="no_hp" placeholder="08xxxxxxxx">
+                                        <input type="text" class="form-control" id="no_hp" name="no_hp" placeholder="08xxxxxxxx" value="<?php echo $mahasiswa->no_hp; ?>">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="tahun" class="col-sm-2 col-form-label">Tahun</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="tahun" name="tahun" placeholder="2020">
+                                        <input type="text" class="form-control" id="tahun" name="tahun" placeholder="2020" value="<?php echo $mahasiswa->name; ?>">
                                     </div>
                                 </div>
 
@@ -193,6 +193,13 @@
                             <input type="submit" name="submit" value="Simpan">
                             <?php echo form_close(); ?>
                         </div>
+                        <!-- chrome gabisa ngeread filename nya -->
+                        <div class="row card-body form-inline">
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="customFile">
+                                <label class="custom-file-label" for="customFile">Choose file</label>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -225,7 +232,7 @@
     </div>
 </div>
 
-</div>
+
 
 
 

@@ -50,11 +50,10 @@
                                                     <div class="row">
                                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                                             <div class="post-title">
-
-                                                                <h3><a href="<?= base_url('publik/section1/' . $data->id); ?>"><?php echo $data->judul ?></a></h3>
-                                                                <div class="entry-content"><i class="fas fa-fw fa-user"></i> <b><?php echo $data->pembimbing ?></b></div>
+                                                                <h3><a href="<?= base_url('publik/section1/' . $data->id); ?>"><?php echo $data->judul; ?></a></h3>
+                                                                <div class="entry-content"><i class="fas fa-fw fa-user"></i> <b><?php echo $data->name; ?>,<?= $data->pembimbing; ?></b></div>
                                                             </div>
-                                                            <div class="entry-content"><span class="fas fa-fw fa-list-alt"></span> <b><i>2020 | Skripsi | S1 Ilmu KOmputer</i></b></div>
+                                                            <div class="entry-content"><span class="fas fa-fw fa-list-alt"></span> <b><i><?= $data->tahun; ?> | Tugas Akhir | <?= $data->program_studi; ?></i></b></div>
                                                         </div>
                                                     </div>
                                                 </div>

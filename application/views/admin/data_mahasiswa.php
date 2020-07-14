@@ -50,14 +50,12 @@
                                                     echo "published";
                                                 } ?> </td>
                                             <td>
-                                                <?php echo $data->user_id; ?>
+
                                                 <a href="<?= base_url('admin/get_detail/' . $data->user_id); ?>" class="btn btn-info p-1">
 
                                                     <span class="text">Detail</span>
                                                 </a>
-                                                <a href="#" class="btn btn-success p-1">
-                                                    <span class="text">Publish</span>
-                                                </a>
+
                                             </td>
 
                                         </tr>

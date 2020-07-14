@@ -11,6 +11,7 @@ class Mahasiswa extends CI_Controller
         $this->load->model('m_mahasiswa');
         $this->load->helper("customhelper");
         $data['user'] = $this->db->get_where('user', ['id' => $this->session->userdata('id')])->row_array();
+        $data['mahasiswa'] = $this->db->get_where('mahasiswa', ['user_id' => $this->session->userdata('id')])->row();
     }
     public function index()
     {
@@ -18,6 +19,7 @@ class Mahasiswa extends CI_Controller
         $data['user'] = $this->db->get_where('user', [
             'username' => $this->session->userdata('username')
         ])->row_array();
+        $data['mahasiswa'] = $this->db->get_where('mahasiswa', ['user_id' => $this->session->userdata('id')])->row();
         $this->load->view('mahasiswa/header.php', $data);
         $this->load->view('mahasiswa/sidebar.php');
         $this->load->view('mahasiswa/main.php');
@@ -74,7 +76,6 @@ class Mahasiswa extends CI_Controller
         $program_studi = $this->input->post('program_studi');
         $no_hp = $this->input->post('no_hp');
         $tahun = $this->input->post('tahun');
-
         $data = array(
 
             'nim' => $nim,
@@ -87,13 +88,7 @@ class Mahasiswa extends CI_Controller
             'user_id' => $this->session->userdata('id')
 
         );
-        if (!$data) {
-
-            $this->m_mahasiswa->input_data($data, 'mahasiswa');
-        } else {
-            echo "data sudah ada";
-        }
-
+        $this->m_mahasiswa->input_data($data, 'mahasiswa');
         redirectPreviousPage();
     }
     public function insert_to_tugas_akhir()
