@@ -43,7 +43,7 @@ class M_publik extends CI_Model
     public function show_ta($id)
     {
         $results = array();
-        $this->db->select('*');
+        $this->db->select('*,tugas_akhir.id as ta_id');
         $this->db->from('tugas_akhir');
         $this->db->join('mahasiswa', 'mahasiswa.user_id = tugas_akhir.user_id');
         $this->db->where('mahasiswa.id', $id);

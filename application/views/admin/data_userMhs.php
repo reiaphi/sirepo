@@ -9,6 +9,16 @@
     <div class="card-body">
         <div class="table-responsive">
             <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                <?php if ($this->session->flashdata('addUSer')) : ?>
+                    <div class="row">
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            Data User<strong>Berhasil</strong> <?= $this->session->flashdata('addUser') ?>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </div>
+                <?php endif; ?>
                 <div class="row my-2">
                     <a href="#" class="btn btn-success btn-icon-split" data-toggle="modal" data-target="#addUser">
                         <span class="icon text-white-50">

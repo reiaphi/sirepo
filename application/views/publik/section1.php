@@ -46,7 +46,8 @@
                 </div>
                 <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
                     <div class="mx-auto my-5" style="width: 200px;">
-                        <a class="btn btn-danger" href="<?= base_url('publik/demo/') . $tugas_akhir[0]['id']; ?>">Demo Aplikasi</a>
+                        <?= $tugas_akhir[0]['id'] ?>
+                        <a class="btn btn-danger" href="<?= base_url('publik/demo/') . $tugas_akhir[0]['ta_id']; ?>">Demo Aplikasi</a>
                     </div>
                 </div>
             </div>

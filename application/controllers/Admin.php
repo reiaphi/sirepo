@@ -83,7 +83,8 @@ class Admin extends CI_Controller
 			'is_active'  => 1,
 		);
 		$this->m_admin->input_data($data, 'user');
-		redirectPreviousPage();
+		$this->session->set_flashdata('addUser', 'Berhasil Ditambahkan');
+		redirect('admin/data_userMhs');
 	}
 	public function delete($id)
 	{
