@@ -1,35 +1,35 @@
 <div class="container-fluid">
     <section id="main-heading" class="section-page">
         <div class="container">
-            <div class="row text-center align-items-center" style="padding: 100px">
+            <div class="row text-center align-items-center mb-3">
                 <div class="col-sm-offset-1 col-sm-10">
                     <h2 class="text-info">Electronic Theses &amp; Dissertations </h2>
-                    <form class="form-inline" method="post" action="#" autocomplete="off">
-                        <div class="input-group input-group-lg col-lg-12  search-box">
-                            <input type="text" class="form-control" name="keyword" placeholder="Search" required="">
-                            <span class="input-group-btn hidden-xs">
-                                <button class="btn btn-outline-info m-1" type="submit"> <i class=" fas fa-fw fa-search"></i>
-                                </button>
-                            </span>
+                    <form class="form" method="post" action="<?= base_url('publik'); ?>">
+                        <div class="row my-3">
+                            <div class="input-group input-group-lg col-lg-12  search-box">
+                                <input type="text" class="form-control" name="keyword" placeholder="Search keyword..">
+                                <span class="input-group-btn hidden-xs">
+                                    <input class="btn btn-outline-info m-1" name="submit" type="submit" value="search"> </span>
+                            </div>
+                        </div>
+                        <div class="row col-md-4 my-3">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text" for="inputGroupSelect01">Sort</label>
+                                </div>
+                                <select class="custom-select md-3">
+                                    <option selected>Choose...</option>
+                                    <option value="1">dari yang terbaru</option>
+                                    <option value="2">dari yang terlama</option>
+                                </select>
+                            </div>
                         </div>
                     </form>
 
                 </div>
             </div>
             <div class="row">
-                <div class="col-3">
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <label class="input-group-text" for="inputGroupSelect01">Sort</label>
-                        </div>
-                        <select class="custom-select md-3">
-                            <option selected>Choose...</option>
-                            <option value="1">dari yang terbaru</option>
-                            <option value="2">dari yang terlama</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col">
+                <div class="col-sm-offset-1 col-sm-10">
                     <table class="table table-hover">
                         <thead>
                             <tr>
@@ -42,8 +42,8 @@
                             $no = 1;
                             foreach ($tugas_akhir as $data) : ?>
                                 <tr>
-                                    <td><?php echo $no++ ?></td>
-                                    <td>
+                                    <td><?php echo $no++; ?></td>
+                                    <td class="col-md-9">
                                         <div class="info-news info-item">
                                             <article class="post">
                                                 <div class="post-content">
@@ -63,7 +63,10 @@
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>
+
                     </table>
+                    <?= $this->pagination->create_links(); ?>
+
                 </div>
             </div>
         </div>

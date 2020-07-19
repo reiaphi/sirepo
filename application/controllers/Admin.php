@@ -86,10 +86,44 @@ class Admin extends CI_Controller
 		$this->session->set_flashdata('addUser', 'Berhasil Ditambahkan');
 		redirect('admin/data_userMhs');
 	}
+	public function update($id)
+	{
+		$data = array(
+			'status' => "3",
+		);
+		$this->db->update;
+		redirectPreviousPage();
+	}
 	public function delete($id)
 	{
 		$where = array('id' => $id);
 		$this->m_admin->hapus_data($where, 'user');
+	}
+
+	public function aprove_ta($id)
+	{
+
+		$data = array(
+			'status_id' => '3'
+
+		);
+		$where = array(
+			'id' => $id
+		);
+		$this->m_admin->update_data($where, $data, 'tugas_akhir');
+		redirectPreviousPage();
+	}
+	public function aprove_file($id)
+	{
+
+		$data = array(
+			'status' => '3'
+
+		);
+		$where = array(
+			'ta_id' => $id
+		);
+		$this->m_admin->update_data($where, $data, 'file');
 		redirectPreviousPage();
 	}
 }

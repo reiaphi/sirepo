@@ -18,10 +18,30 @@ class Publik extends CI_Controller
     public function index()
     {
         $data = array();
+
+        //pagination 
+        $this->load->library('pagination');
+
+        $data['keyword'] = null;
+        if ($this->input->post('submit')) {
+            $data['keyword'] = $this->input->post('keyword');
+            echo $data['keyword'];
+        } else {
+            $data['keyword'] = null;
+        }
+
+        //config
+        $config['total_rows'] = $this->m_publik->count_ta();
+        $config['per_page'] = 1;
+
+        //initialize
+        $this->pagination->initialize($config);
+        $data['start'] = $this->uri->segment(3);
+
         $data['user'] = $this->db->get_where('user', ['id' => $this->session->userdata('id')])->row_array();
-        $data['tugas_akhir'] = $this->show_tugas_akhir();
+        $data['tugas_akhir'] = $this->m_publik->show_tugas_akhir($config['per_page'], $data['start'], $data['keyword']);
         $this->load->view('publik/header.php', $data);
-        $this->load->view('publik/home.php');
+        $this->load->view('publik/home.php', $data);
         //$this->load->view('publik/test.php');
         $this->load->view('publik/footer.php');
     }
@@ -54,18 +74,7 @@ class Publik extends CI_Controller
         echo $data;
         return $data;
     }
-    public function show_tugas_akhir()
-    {
-        $results = array();
-        $this->db->select('*');
-        $this->db->from('tugas_akhir');
-        $this->db->join('mahasiswa', 'mahasiswa.user_id = tugas_akhir.user_id');
-        $query = $this->db->get();
-        if ($query->num_rows() > 0) {
-            $results = $query->result();
-        }
-        return $results;
-    }
+
 
     public function download($id)
     {

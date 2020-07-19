@@ -65,6 +65,7 @@ class M_admin extends CI_Model
         if ($query->num_rows() > 0) {
             $results = $query->result();
         }
+        //var_dump($results);
         return $results;
     }
     public function get_status_ta($id)
@@ -75,14 +76,20 @@ class M_admin extends CI_Model
     }
     public function show_detail($id)
     {
-        return $this->db->get_where('tugas_akhir', ['user_id' => $id])->row();
+        $query = $this->db->get_where('tugas_akhir', ['user_id' => $id])->row();
+        //var_dump($query);
+        return $query;
     }
     public function get_file($id)
     {
-        return $this->db->get_where('file', ['user_id' => $id])->result_array();
+        $query = $this->db->get_where('file', ['user_id' => $id])->result_array();
+        var_dump($query);
+        return $query;
     }
     public function get_mhs($id)
     {
-        return $this->db->get_where('mahasiswa', ['user_id' => $id])->row();
+        $query = $this->db->get_where('mahasiswa', ['user_id' => $id])->row();
+        //var_dump($query);
+        return $query;
     }
 }

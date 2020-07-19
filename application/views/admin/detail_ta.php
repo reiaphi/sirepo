@@ -13,50 +13,50 @@
                     <h6 class="m-0 font-weight-bold text-primary">Biodata Mahasiswa</h6>
                 </div>
                 <div class="card-body">
-                    <form>
-                        <div class="form-group row">
-                            <label for="nim" class="col-sm-3 col-form-label">NIM</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" id="nim" value="<?= $mahasiswa->nim; ?>" disabled>
-                            </div>
+
+                    <div class="form-group row">
+                        <label for="nim" class="col-sm-3 col-form-label">NIM</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="nim" value="<?= $mahasiswa->nim; ?>" disabled>
                         </div>
-                        <div class="form-group row">
-                            <label for="fullname" class="col-sm-3 col-form-label">Nama Lengkap</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" id="fullname" value="<?= $mahasiswa->name; ?>" disabled>
-                            </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="fullname" class="col-sm-3 col-form-label">Nama Lengkap</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="fullname" value="<?= $mahasiswa->name; ?>" disabled>
                         </div>
-                        <div class="form-group row">
-                            <label for="email" class="col-sm-3 col-form-label">Email</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" id="email" value="<?= $mahasiswa->email; ?>" disabled>
-                            </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="email" class="col-sm-3 col-form-label">Email</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="email" value="<?= $mahasiswa->email; ?>" disabled>
                         </div>
-                        <div class="form-group row">
-                            <label for="fakultas" class="col-sm-3 col-form-label">Fakultas</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" id="fakultas" value="<?= $mahasiswa->fakultas; ?>" disabled>
-                            </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="fakultas" class="col-sm-3 col-form-label">Fakultas</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="fakultas" value="<?= $mahasiswa->fakultas; ?>" disabled>
                         </div>
-                        <div class="form-group row">
-                            <label for="prodi" class="col-sm-3 col-form-label">Program Studi</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" id="prodi" value="<?= $mahasiswa->program_studi; ?>" disabled>
-                            </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="prodi" class="col-sm-3 col-form-label">Program Studi</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="prodi" value="<?= $mahasiswa->program_studi; ?>" disabled>
                         </div>
-                        <div class="form-group row">
-                            <label for="nohp" class="col-sm-3 col-form-label">No. HP</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" id="nohp" value="<?= $mahasiswa->no_hp; ?>" disabled>
-                            </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="nohp" class="col-sm-3 col-form-label">No. HP</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="nohp" value="<?= $mahasiswa->no_hp; ?>" disabled>
                         </div>
-                        <div class="form-group row">
-                            <label for="tahun" class="col-sm-3 col-form-label">Tahun</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" id="tahun" value="<?= $mahasiswa->tahun; ?>" disabled>
-                            </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="tahun" class="col-sm-3 col-form-label">Tahun</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="tahun" value="<?= $mahasiswa->tahun; ?>" disabled>
                         </div>
-                    </form>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -102,12 +102,14 @@
                                 </span>
                                 <span class="text">Upload Ulang</span>
                             </a>
-                            <a href="#" class="btn btn-success btn-icon-split m-2">
-                                <span class="icon text-white-50">
-                                    <i class="fas fa-check "></i>
-                                </span>
-                                <span class="text">Publish</span>
-                            </a>
+                            <form method="POST" action="<?= base_url('admin/aprove/') . $ta->id; ?>">
+                                <button type="submit" class="btn btn-success btn-icon-split m-2">
+                                    <span class="icon text-white-50">
+                                        <i class="fas fa-check "></i>
+                                    </span>
+                                    <span class="text">Publish</span>
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -147,11 +149,12 @@
                                 </span>
                                 <span class="text">Upload Ulang</span>
                             </a>
-                            <a href="#" class="btn btn-success btn-icon-split m-2">
-                                <span class="icon text-white-50">
+                            <p> <?= $files['ta_id']; ?> </p>
+                            <span class="icon text-white-50">
+                                <a href="<?= base_url('admin/aprove_file/') . $files['ta_id']; ?>" class="btn btn-success btn-icon-split m-2">
                                     <i class="fas fa-check "></i>
-                                </span>
-                                <span class="text">Publish</span>
+                            </span>
+                            <span class="text">Publish</span>
 
                             </a>
                             <!-- Modal -->
@@ -176,6 +179,7 @@
                             </div>
 
                         </div>
+
                     </div>
                 </div>
             </div>

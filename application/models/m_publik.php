@@ -13,7 +13,32 @@ class M_publik extends CI_Model
     {
         return $this->db->get('tugas_akhir');
     }
-
+    public function show_tugas_akhir($limit, $start, $keyword = null)
+    {
+        $results = array();
+        $this->db->select('*');
+        $this->db->from('tugas_akhir');
+        $this->db->where('status_id', 3);
+        $this->db->join('mahasiswa', 'mahasiswa.user_id = tugas_akhir.user_id');
+        $this->db->limit($limit, $start);
+        if ($keyword) {
+            $this->db->group_start();  //group start
+            $this->db->like('judul', $keyword);
+            $this->db->or_like('name', $keyword);
+            $this->db->or_like('pembimbing', $keyword);
+            $this->db->group_end();  //group ed
+        }
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            $results = $query->result();
+        }
+        return $results;
+    }
+    public function count_ta()
+    {
+        $this->db->where('status_id', 3);
+        return $this->db->get('tugas_akhir')->num_rows();
+    }
     public function get_detail($id)
     {
         return $this->db->get_where('tugas_akhir', ['id' => $id])->row();
@@ -68,7 +93,7 @@ class M_publik extends CI_Model
         $this->db->select('*');
         $this->db->from('file');
         //nanti diubah kalau status sudah diganti yaa
-        $this->db->where('status', '1');
+        $this->db->where('status', '3');
         $this->db->order_by('ta_id');
         if (array_key_exists('name', $params) && !empty($params['name'])) {
             $this->db->where('name', $params['name']);

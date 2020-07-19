@@ -42,13 +42,18 @@
                                             <td><?php echo $data->nim; ?></td>
                                             <td><?php echo $data->name; ?></td>
                                             <td><?php echo $data->judul; ?></td>
-                                            <td><?php if ($data->status_id = 1) {
-                                                    echo "upload";
-                                                } elseif ($data->status_id = 2) {
-                                                    echo "pending";
-                                                } elseif ($data->status_id = 3) {
-                                                    echo "published";
-                                                } ?> </td>
+                                            <td><?php if ($data->status_id === '1') : ?>
+                                                    <!-- Approve -->
+                                                    <p>Upload</p>
+
+                                                <?php elseif ($data->status_id === '2') : ?>
+                                                    <!-- tidak di aprove -->
+                                                    <p>Pending</p>
+
+                                                <?php else : ?>
+                                                    <p>Publish</p>
+                                                <?php endif; ?>
+                                            </td>
                                             <td>
 
                                                 <a href="<?= base_url('admin/get_detail/' . $data->user_id); ?>" class="btn btn-info p-1">
