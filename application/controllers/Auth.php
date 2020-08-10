@@ -55,7 +55,7 @@ class Auth extends CI_Controller
                 $this->index();
             }
         } else {
-            $this->index();
+            echo "user tidak ada";
         }
     }
     public function logout()

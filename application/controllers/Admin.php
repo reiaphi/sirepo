@@ -126,4 +126,33 @@ class Admin extends CI_Controller
 		$this->m_admin->update_data($where, $data, 'file');
 		redirectPreviousPage();
 	}
+	public function send_email($id)
+	{
+		$this->load->library('email');
+		$config = array();
+		$config['charset'] = 'utf-8';
+		$config['useragent'] = 'Codeigniter';
+		$config['protocol'] = "smtp";
+		$config['mailtype'] = "html";
+		$config['smtp_host'] = "ssl://smtp.gmail.com"; //pengaturan smtp
+		$config['smtp_port'] = "465";
+		$config['smtp_timeout'] = "5";
+		$config['smtp_user'] = 'sitish272@gmail.com'; // isi dengan email kamu
+		$config['smtp_pass'] = 'makanapaya'; // isi dengan password kamu
+		$config['crlf'] = "\r\n";
+		$config['newline'] = "\r\n";
+		$config['wordwrap'] = TRUE;
+		$this->email->initialize($config);
+		$this->load->library('email');
+		$this->email->set_newline("\r\n");
+		$this->email->from('sitish272@gmail.com', 'Admin Re:Code');
+		$this->email->to('sitish272@gmail.com');
+		$this->email->subject('Percobaan email');
+		$this->email->message('Ini adalah email test');
+		if (!$this->email->send()) {
+			show_error($this->email->print_debugger());
+		} else {
+			echo 'Success to send email';
+		}
+	}
 }

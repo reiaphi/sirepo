@@ -83,7 +83,7 @@ class M_admin extends CI_Model
     public function get_file($id)
     {
         $query = $this->db->get_where('file', ['user_id' => $id])->result_array();
-        var_dump($query);
+        //var_dump($query);
         return $query;
     }
     public function get_mhs($id)

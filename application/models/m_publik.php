@@ -34,6 +34,28 @@ class M_publik extends CI_Model
         }
         return $results;
     }
+    public function count_tugas_akhir($limit, $start, $keyword = null)
+    {
+        $results = array();
+        $this->db->select('*');
+        $this->db->from('tugas_akhir');
+        $this->db->where('status_id', 3);
+        $this->db->join('mahasiswa', 'mahasiswa.user_id = tugas_akhir.user_id');
+        $this->db->limit($limit, $start);
+        if ($keyword) {
+            $this->db->group_start();  //group start
+            $this->db->like('judul', $keyword);
+            $this->db->or_like('name', $keyword);
+            $this->db->or_like('pembimbing', $keyword);
+            $this->db->group_end();  //group ed
+        }
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            $results = $query->num_rows();
+        }
+        var_dump($results);
+        return $results;
+    }
     public function count_ta()
     {
         $this->db->where('status_id', 3);
@@ -57,6 +79,7 @@ class M_publik extends CI_Model
         $this->db->select('*');
         $this->db->from('mahasiswa');
         $this->db->join('file', 'mahasiswa.user_id = file.user_id');
+        $this->db->where('file.status', 3);
         $this->db->where('mahasiswa.id', $id);
         $query = $this->db->get();
         if ($query->num_rows() > 0) {

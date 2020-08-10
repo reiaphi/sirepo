@@ -100,14 +100,14 @@
                                 <span class="icon text-white-50">
                                     <i class="fas fa-exclamation-triangle "></i>
                                 </span>
-                                <span class="text">Upload Ulang</span>
+                                <span class="text">Declined</span>
                             </a>
                             <form method="POST" action="<?= base_url('admin/aprove/') . $ta->id; ?>">
                                 <button type="submit" class="btn btn-success btn-icon-split m-2">
                                     <span class="icon text-white-50">
                                         <i class="fas fa-check "></i>
                                     </span>
-                                    <span class="text">Publish</span>
+                                    <span class="text">Aprove</span>
                                 </button>
                             </form>
                         </div>
@@ -136,27 +136,32 @@
                                         <?php
                                         echo $files['name'];
                                         ?>
-                                        <a href="<?php echo base_url('publik/download/') .  $files['name']; ?>"> <i class=" fas fa-fw fa-eye"></i></a>
-
+                                        <a href="<?php echo base_url('publik/preview/') .  $files['id']; ?>"> <i class=" fas fa-fw fa-eye"></i></a>
                                     <?php endforeach;
                                     ?>
                             </ul>
                         </div>
                         <div class="row">
-                            <a href="#" class="btn btn-warning btn-icon-split m-2">
-                                <span class="icon text-white-50">
-                                    <i class="fas fa-exclamation-triangle "></i>
-                                </span>
-                                <span class="text">Upload Ulang</span>
-                            </a>
+                            <form method="POST" action="<?= base_url('admin/send_email/') . $files['ta_id']; ?>">
+                                <button type="submit" class="btn btn-warning btn-icon-split m-2">
+                                    <span class="icon text-white-50">
+                                        <i class="fas fa-exclamation-triangle "></i>
+                                    </span>
+                                    <span class="text">Declined</span>
+                                </button>
+                            </form>
                             <p> <?= $files['ta_id']; ?> </p>
-                            <span class="icon text-white-50">
-                                <a href="<?= base_url('admin/aprove_file/') . $files['ta_id']; ?>" class="btn btn-success btn-icon-split m-2">
-                                    <i class="fas fa-check "></i>
-                            </span>
-                            <span class="text">Publish</span>
+                            <form method="POST" action="<?= base_url('admin/aprove_file/') . $files['ta_id']; ?>">
+                                <button type="submit" class="btn btn-success btn-icon-split m-2">
+                                    <span class="icon text-white-50">
+                                        <i class="fas fa-check "></i>
+                                    </span>
+                                    <span class="text">Aprove</span>
+                                </button>
+                            </form>
 
-                            </a>
+
+
                             <!-- Modal -->
                             <div class="modal fade" id="mosalPublish" role="dialog">
                                 <div class="modal-dialog">

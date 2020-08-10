@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <section id="main-heading" class="section-page">
         <div class="container">
-            <div class="row text-center align-items-center mb-3">
+            <div class="row text-center align-items-center my-3">
                 <div class="col-sm-offset-1 col-sm-10">
                     <h2 class="text-info">Electronic Theses &amp; Dissertations </h2>
                     <form class="form" method="post" action="<?= base_url('publik'); ?>">
@@ -38,11 +38,16 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <?php if (empty($tugas_akhir)) : ?>
+                                <tr>
+                                    <td>Data tidak ditemukan</td>
+                                </tr>
+                            <?php endif; ?>
                             <?php
                             $no = 1;
                             foreach ($tugas_akhir as $data) : ?>
                                 <tr>
-                                    <td><?php echo $no++; ?></td>
+                                    <td><?php echo $no; ?></td>
                                     <td class="col-md-9">
                                         <div class="info-news info-item">
                                             <article class="post">
@@ -61,7 +66,8 @@
                                         </div>
                                     </td>
                                 </tr>
-                            <?php endforeach; ?>
+                            <?php $no++;
+                            endforeach; ?>
                         </tbody>
 
                     </table>

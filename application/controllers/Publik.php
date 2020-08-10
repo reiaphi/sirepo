@@ -22,16 +22,29 @@ class Publik extends CI_Controller
         //pagination 
         $this->load->library('pagination');
 
-        $data['keyword'] = null;
+
         if ($this->input->post('submit')) {
             $data['keyword'] = $this->input->post('keyword');
+            $this->session->set_userdata('keyword', $data['keyword']);
             echo $data['keyword'];
         } else {
-            $data['keyword'] = null;
+            $data['keyword'] = $this->session->userdata('keyword');
         }
 
         //config
-        $config['total_rows'] = $this->m_publik->count_ta();
+        if (!empty($data['keyword'])) {
+            $this->db->group_start();  //group start
+            $this->db->like('judul', $data['keyword']);
+            $this->db->or_like('name', $data['keyword']);
+            $this->db->or_like('pembimbing', $data['keyword']);
+            $this->db->from('tugas_akhir');
+            $this->db->where('status_id', 3);
+            $this->db->join('mahasiswa', 'mahasiswa.user_id = tugas_akhir.user_id');
+            $this->db->group_end();  //group ed
+            $config['total_rows'] = $this->db->count_all_results();
+        } else {
+            $config['total_rows'] = $this->m_publik->count_ta();
+        }
         $config['per_page'] = 1;
 
         //initialize
@@ -45,7 +58,11 @@ class Publik extends CI_Controller
         //$this->load->view('publik/test.php');
         $this->load->view('publik/footer.php');
     }
-
+    public function home()
+    {
+        $this->session->unset_userdata('keyword');
+        redirect('publik');
+    }
     public function gotoLogin()
     {
         redirect('auth');
@@ -90,5 +107,12 @@ class Publik extends CI_Controller
         header('Content-Type: ' . $mime);  // Add the mime type from Code igniter.
 
         return force_download($filename, $data);
+    }
+    public function preview($id)
+    {
+
+        $data['file'] = $this->db->get_where('file', ['id' => $id])->row();
+        var_dump($data);
+        return  $this->load->view('file.php', $data);
     }
 }

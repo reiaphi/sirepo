@@ -57,6 +57,7 @@
     $(".submitBtn").click(function() {
       $(".submitBtn").attr("disabled", true);
       return true;
+
     });
   });
 </script>

@@ -31,13 +31,14 @@
                 </div>
                 <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                     <ul class="list-group text-left m-3">
+
                         <?php foreach ($file as $files) :
                         ?>
                             <li class="list-group-item">
-                                <?php
-                                echo $files['name'];
-                                ?>
+
+                                <?php echo $files['name']; ?>
                                 <a href="<?php echo base_url('publik/download/') .  $files['name']; ?>"> <i class=" fas fa-fw fa-download"></i></a>
+
                             </li>
                         <?php endforeach;
                         ?>

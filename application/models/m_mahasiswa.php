@@ -115,4 +115,26 @@ class M_mahasiswa extends CI_Model
 
         $this->db->insert('file_aplikasi', $data);
     }
+    public function cek_data($id)
+    {
+        return $this->db->get_where('mahasiswa', ['user_id' => $id])->row_array();
+    }
+    public function cek_data_file($id)
+    {
+        $this->db->get_where('file', ['user_id' => $id])->row_array();
+        if ($this->count_file($id) > 3) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public function count_file($id)
+    {
+        $this->db->where('user_id', $id);
+        return $this->db->get('file')->num_rows();
+    }
+    public function cek_file_app($id)
+    {
+        return $this->db->get_where('file_aplikasi', ['user_id' => $id])->row();
+    }
 }

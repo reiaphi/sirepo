@@ -20,9 +20,12 @@ class Mahasiswa extends CI_Controller
             'username' => $this->session->userdata('username')
         ])->row_array();
         $data['mahasiswa'] = $this->db->get_where('mahasiswa', ['user_id' => $this->session->userdata('id')])->row();
+        $data['ta_saya'] = $this->get_ta_saya();
+        $data['file'] = $this->get_file();
         $this->load->view('mahasiswa/header.php', $data);
         $this->load->view('mahasiswa/sidebar.php');
-        $this->load->view('mahasiswa/main.php');
+        // $this->load->view('mahasiswa/temp.php');
+        $this->load_view_form($this->session->userdata('id'));
         $this->load->view('mahasiswa/footer');
     }
 
@@ -89,6 +92,7 @@ class Mahasiswa extends CI_Controller
 
         );
         $this->m_mahasiswa->input_data($data, 'mahasiswa');
+        $this->session->set_flashdata('save', 'disimpan');
         redirectPreviousPage();
     }
     public function insert_to_tugas_akhir()
@@ -113,18 +117,20 @@ class Mahasiswa extends CI_Controller
 
         );
         $this->m_mahasiswa->input_data($data, 'tugas_akhir');
+        // $this->session->set_flashdata('saved', 'disimpan');
 
         redirectPreviousPage();
     }
     public function insert_to_file_laporan()
     {
+
         $data = array();
         if ($this->input->post('submit')) { // Jika user menekan tombol Submit (Simpan) pada form
-            // lakukan upload file dengan memanggil function upload yang ada di GambarModel.php
+            // lakukan upload file dengan memanggil function upload yang ada di model
             $upload = $this->m_mahasiswa->upload();
 
             if ($upload['result'] == "success") { // Jika proses upload sukses
-                // Panggil function save yang ada di GambarModel.php untuk menyimpan data ke database
+                // Panggil function save yang ada di model untuk menyimpan data ke database
                 $this->m_mahasiswa->save($upload, 'file');
 
                 redirect('mahasiswa'); // Redirect kembali ke halaman awal / halaman view data
@@ -149,5 +155,73 @@ class Mahasiswa extends CI_Controller
         }
 
         redirectPreviousPage();
+    }
+    public function form_mhs()
+    {
+        $data['user'] = $this->db->get_where('user', ['id' => $this->session->userdata('id')])->row_array();
+        $nim = $this->input->post('nim');
+        $name = $this->input->post('name');
+        $email = $this->input->post('email');
+        $fakultas = $this->input->post('fakultas');
+        $program_studi = $this->input->post('program_studi');
+        $no_hp = $this->input->post('no_hp');
+        $tahun = $this->input->post('tahun');
+        $data_mhs = array(
+
+            'nim' => $nim,
+            'name' => $name,
+            'email' => $email,
+            'fakultas' => $fakultas,
+            'program_studi' => $program_studi,
+            'no_hp' => $no_hp,
+            'tahun' => $tahun,
+            'user_id' => $this->session->userdata('id')
+
+        );
+        $judul = $this->input->post('judul');
+        $intisari = $this->input->post('intisari');
+        $abstract = $this->input->post('abstract');
+        $pembimbing = $this->input->post('pembimbing');
+        $kata_kunci = $this->input->post('kata_kunci');
+        $data_tugas_akhir = array(
+
+            'judul' => $judul,
+            'intisari' => $intisari,
+            'abstract' => $abstract,
+            'pembimbing' => $pembimbing,
+            'kata_kunci' => $kata_kunci,
+            'user_id' => $this->session->userdata('id')
+
+        );
+        // var_dump($data_mhs);
+        // var_dump($data_tugas_akhir);
+        $this->m_mahasiswa->input_data($data_mhs, 'mahasiswa');
+        $this->m_mahasiswa->input_data($data_tugas_akhir, 'tugas_akhir');
+        redirectPreviousPage();
+    }
+    public function load_view_form($id)
+    {
+
+        //jika datanya sudah ada
+        if ($this->m_mahasiswa->cek_data($id)) {
+            //cek data file
+            if ($this->m_mahasiswa->cek_data_file($id)) {
+                //cek file aplikasi 
+                if ($this->m_mahasiswa->cek_file_app($id)) {
+                    //semua form sudah terisi
+                    $this->load->view('mahasiswa/form/done.php');
+                } else {
+                    //keluarkan datanya dan form upload file aplikasi
+                    $this->load->view('mahasiswa/form/file_app.php');
+                }
+            } else {
+                //keluarkan form untuk upload lagi 
+                $this->load->view('mahasiswa/form/laporan_dan_app.php');
+            }
+        }
+        //tampikan 
+        else {
+            $this->load->view('mahasiswa/temp.php');
+        }
     }
 }

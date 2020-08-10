@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Repositori</title>
+    <title href="<?php echo base_url('publik/home'); ?>">Repositori</title>
 
     <!-- Custom fonts for this template-->
     <link href="<?= base_url('assets/'); ?>vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -27,21 +27,10 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="<?php echo base_url('publik/home/'); ?>">Home</span></a>
                 </li>
 
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Browse
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Browse By Year</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Browse By Subject</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Browse By Type</a>
-                    </div>
-                </li>
+
             </ul>
         </div>
         <a class="navbar-brand" href="<?= base_url('publik/gotoLogin'); ?>">Login </a>
