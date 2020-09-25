@@ -49,10 +49,10 @@ class Auth extends CI_Controller
                     //cek role user
                     redirect('user');
                 } else {
-                    $this->index();
+                    echo "user tidak ada";
                 }
             } else {
-                $this->index();
+                echo "user tidak ada";
             }
         } else {
             echo "user tidak ada";

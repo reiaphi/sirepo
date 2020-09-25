@@ -1,0 +1,39 @@
+body{
+    background-color: #f8f9fc;
+}
+footer{
+    background-color: #f8f9fc;
+}
+.bd-navbar{
+    background-color: #36b9cc;
+    
+}
+.color-utama{
+    color:#22747f ;
+}
+.color-sekunder{
+    color:#36b9cc ;
+}
+
+.bgcolor-utama{
+    background-color:#22747f ;
+}
+.bgcolor-sekunder{
+    background-color:#36b9cc ;
+}
+.pagination-item.active .page-link {
+    z-index: 1;
+    color: #fff;
+    background-color: #36b9cc;
+    border-color:#22747f;
+  }
+  .pagination-link {
+    position: relative;
+    display: block;
+    padding: 0.5rem 0.75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: #22747f;
+    background-color: #fff;
+    border: 1px solid #dddfeb;
+  }

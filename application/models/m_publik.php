@@ -13,13 +13,14 @@ class M_publik extends CI_Model
     {
         return $this->db->get('tugas_akhir');
     }
-    public function show_tugas_akhir($limit, $start, $keyword = null)
+    public function show_tugas_akhir($limit, $start, $keyword = null, $sort)
     {
         $results = array();
         $this->db->select('*');
         $this->db->from('tugas_akhir');
         $this->db->where('status_id', 3);
         $this->db->join('mahasiswa', 'mahasiswa.user_id = tugas_akhir.user_id');
+        $this->db->order_by('tahun', $sort);
         $this->db->limit($limit, $start);
         if ($keyword) {
             $this->db->group_start();  //group start

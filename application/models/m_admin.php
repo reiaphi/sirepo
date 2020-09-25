@@ -31,6 +31,12 @@ class M_admin extends CI_Model
         $this->db->where($where);
         $this->db->update($table, $data);
     }
+    public function aprove_file_laporan($id, $kategori)
+    {
+        $this->db->set('file', $kategori);
+        $this->db->where('id', $id);
+        $this->db->update('file');
+    }
     public function show_userMhs()
     {
         $results = array();
@@ -68,6 +74,19 @@ class M_admin extends CI_Model
         //var_dump($results);
         return $results;
     }
+    public function show_file_aplikasi()
+    {
+        $results = array();
+        $this->db->select('*');
+        $this->db->from('mahasiswa');
+        $this->db->join('file_aplikasi', 'mahasiswa.user_id = file_aplikasi.user_id');
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            $results = $query->result();
+        }
+        //var_dump($results);
+        return $results;
+    }
     public function get_status_ta($id)
     {
         $query = $this->db->get_where('tugas_akhir_status', ['tugas_akhir_status.id' => $id]);
@@ -86,10 +105,19 @@ class M_admin extends CI_Model
         //var_dump($query);
         return $query;
     }
+    public function get_file_app($id)
+    {
+        return $this->db->get_where('file_aplikasi', ['user_id' => $id])->row();
+    }
     public function get_mhs($id)
     {
         $query = $this->db->get_where('mahasiswa', ['user_id' => $id])->row();
         //var_dump($query);
         return $query;
+    }
+    public function get_mhs_email($id)
+    {
+
+        return $this->db->get_where('mahasiswa', ['id' => $id])->row();
     }
 }

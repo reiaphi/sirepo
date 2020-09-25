@@ -29,13 +29,18 @@ class Mahasiswa extends CI_Controller
         $this->load->view('mahasiswa/footer');
     }
 
-    public function my_profile()
+    public function status_data()
     {
+        $data = array();
         $data['title'] = 'Mahasiswa';
         $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
+        $data['metadata'] =  $this->db->get_where('tugas_akhir', ['user_id' => $this->session->userdata('id')])->row();
+        $data['mahasiswa'] = $this->get_nama_mahasiswa();
+        $data['file_laporan'] =   $this->get_file();
+        $data['file_aplikasi'] = $this->db->get_where('file_aplikasi', ['user_id' => $this->session->userdata('id')])->row();
         $this->load->view('mahasiswa/header.php', $data);
-        $this->load->view('mahasiswa/sidebar.php', $data);
-        $this->load->view('mahasiswa/my_profile.php');
+        $this->load->view('mahasiswa/sidebar.php');
+        $this->load->view('mahasiswa/status_data.php', $data);
         $this->load->view('mahasiswa/footer');
     }
 
@@ -76,6 +81,7 @@ class Mahasiswa extends CI_Controller
         $name = $this->input->post('name');
         $email = $this->input->post('email');
         $fakultas = $this->input->post('fakultas');
+        $jenjang = $this->input->post('jenjang');
         $program_studi = $this->input->post('program_studi');
         $no_hp = $this->input->post('no_hp');
         $tahun = $this->input->post('tahun');
@@ -85,12 +91,13 @@ class Mahasiswa extends CI_Controller
             'name' => $name,
             'email' => $email,
             'fakultas' => $fakultas,
-            'program_studi' => $program_studi,
+            'program_studi' => $jenjang . $program_studi,
             'no_hp' => $no_hp,
             'tahun' => $tahun,
             'user_id' => $this->session->userdata('id')
 
         );
+        var_dump($data);
         $this->m_mahasiswa->input_data($data, 'mahasiswa');
         $this->session->set_flashdata('save', 'disimpan');
         redirectPreviousPage();

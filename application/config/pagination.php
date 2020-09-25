@@ -22,7 +22,7 @@ $config['prev_link'] = '&laquo';
 $config['prev_tag_open'] = '<li class="page-item">';
 $config['prev_tag_close'] = '</li>';
 
-$config['cur_tag_open'] = '<li class="page-item active"><a class="page-link">';
+$config['cur_tag_open'] = '<li class="pagination-item.active text-white"><a class="page-link bgcolor-sekunder">';
 $config['cur_tag_close'] = '</a></li>';
 
 $config['num_tag_open'] = '<li class="page-item">';

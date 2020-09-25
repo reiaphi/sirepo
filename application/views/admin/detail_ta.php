@@ -72,45 +72,42 @@
                 <!-- Card Content - Collapse -->
                 <div class="collapse" id="collapseCardExample">
                     <div class="card-body">
-                        <div class="row">
-                            <div class="col col-md-3 "><strong>Judul</strong></div>
-                            <div class="col">
-                                <h4><?= $ta->judul; ?></h4>
-                                <hr>
+                        <?php if ($ta) : ?>
+                            <div class="row">
+                                <div class="col col-md-3 "><strong>Judul</strong></div>
+                                <div class="col">
+                                    <h4><?= $ta->judul; ?></h4>
+                                    <hr>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col col-md-3 "><strong>Pembimbing </strong></div>
-                            <div class="col"><?= $ta->pembimbing; ?></div>
-                        </div>
-                        <div class="row">
-                            <div class="col col-md-3 "><strong>Intisari</strong></div>
-                            <div class="col"><?= $ta->intisari; ?></div>
-                        </div>
-                        <div class="row">
-                            <div class="col col-md-3 "><strong>Abstract</strong></div>
-                            <div class="col"><em><?= $ta->abstract; ?></em></div>
-                        </div>
-                        <div class="row">
-                            <div class="col col-md-3 "><strong>Kata Kunci</strong></div>
-                            <div class="col"><?= $ta->kata_kunci; ?></div>
-                        </div>
-                        <div class="row">
-                            <a href="#" class="btn btn-warning btn-icon-split m-2">
-                                <span class="icon text-white-50">
-                                    <i class="fas fa-exclamation-triangle "></i>
-                                </span>
-                                <span class="text">Declined</span>
-                            </a>
-                            <form method="POST" action="<?= base_url('admin/aprove/') . $ta->id; ?>">
-                                <button type="submit" class="btn btn-success btn-icon-split m-2">
-                                    <span class="icon text-white-50">
-                                        <i class="fas fa-check "></i>
-                                    </span>
-                                    <span class="text">Aprove</span>
-                                </button>
-                            </form>
-                        </div>
+                            <div class="row">
+                                <div class="col col-md-3 "><strong>Pembimbing </strong></div>
+                                <div class="col"><?= $ta->pembimbing; ?></div>
+                            </div>
+                            <div class="row">
+                                <div class="col col-md-3 "><strong>Intisari</strong></div>
+                                <div class="col"><?= $ta->intisari; ?></div>
+                            </div>
+                            <div class="row">
+                                <div class="col col-md-3 "><strong>Abstract</strong></div>
+                                <div class="col"><em><?= $ta->abstract; ?></em></div>
+                            </div>
+                            <div class="row">
+                                <div class="col col-md-3 "><strong>Kata Kunci</strong></div>
+                                <div class="col"><?= $ta->kata_kunci; ?></div>
+                            </div>
+                            <div class="row">
+                                <?php if ($ta->status_id == 1) : ?>
+                                    <form method="POST" action="<?= base_url('admin/action_ta/') . $ta->id; ?>">
+                                        <input type="submit" name="action" value="aprove" class="btn btn-success btn-icon-split m-2" />
+                                        <input type="submit" name="action" value="declined" class="btn btn-danger btn-icon-split m-2" />
+
+                                    </form>
+                                <?php endif; ?>
+                            </div>
+                        <?php else : ?>
+                            <p>Tidak ada data</p>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
@@ -130,61 +127,54 @@
                     <div class="card-body">
                         <div class="row">
                             <ul class="list-group text-left m-3">
-                                <?php foreach ($file as $files) :
-                                ?>
-                                    <li class="list-group-item">
-                                        <?php
-                                        echo $files['name'];
-                                        ?>
-                                        <a href="<?php echo base_url('publik/preview/') .  $files['id']; ?>"> <i class=" fas fa-fw fa-eye"></i></a>
-                                    <?php endforeach;
+                                <?php if ($file) : ?>
+                                    <?php foreach ($file as $files) :
                                     ?>
+                                        <li class="list-group-item">
+                                            <?php
+                                            echo $files['name'];
+                                            ?>
+                                            <a href="<?php echo base_url('publik/preview/') .  $files['id']; ?>"> <i class=" fas fa-fw fa-eye"></i></a>
+                                            <?php if ($files['status'] == 1) : ?>
+                                                <form method="POST" action="<?= base_url('admin/action_file/') . $files['id']; ?>">
+                                                    <div class="input-group mb-3">
+                                                        <div class="input-group-prepend">
+                                                            <label class="input-group-text" for="inputGroupSelect01">Options</label>
+                                                        </div>
+                                                        <select class="custom-select" id="inputGroupSelect01" name="kategori_file">
+                                                            <option selected>Choose...</option>
+                                                            <option value="1">Judul</option>
+                                                            <option value="2">Abstrak/Intisari & Abstact</option>
+                                                            <option value="3">Daftar Isi</option>
+                                                            <option value="4">Pendahuluan</option>
+                                                            <option value="5">Penutup/Kesimpulan</option>
+                                                            <option value="6">Daftar Pustaka</option>
+                                                            <option value="7">Fulltext</option>
+                                                        </select>
+                                                    </div>
+                                                    <input type="submit" name="action" value="aprove" class="btn btn-success btn-icon-split m-2" />
+                                                    <input type="submit" name="action" value="declined" class="btn btn-danger btn-icon-split m-2" />
+
+                                                </form>
+                                            <?php endif; ?>
+                                        <?php endforeach;
+                                        ?>
+                                    <?php elseif (!$file) : ?>
+                                        <p>tidak ada data</p>
+                                    <?php endif; ?>
                             </ul>
                         </div>
                         <div class="row">
-                            <form method="POST" action="<?= base_url('admin/send_email/') . $files['ta_id']; ?>">
+                            <?= $mahasiswa->id; ?>
+                            <form method="POST" action="<?= base_url('admin/send_email/') . $mahasiswa->id; ?>">
                                 <button type="submit" class="btn btn-warning btn-icon-split m-2">
                                     <span class="icon text-white-50">
-                                        <i class="fas fa-exclamation-triangle "></i>
+                                        <i class="fas fa-envelope "></i>
                                     </span>
-                                    <span class="text">Declined</span>
+                                    <span class="text">send email</span>
                                 </button>
                             </form>
-                            <p> <?= $files['ta_id']; ?> </p>
-                            <form method="POST" action="<?= base_url('admin/aprove_file/') . $files['ta_id']; ?>">
-                                <button type="submit" class="btn btn-success btn-icon-split m-2">
-                                    <span class="icon text-white-50">
-                                        <i class="fas fa-check "></i>
-                                    </span>
-                                    <span class="text">Aprove</span>
-                                </button>
-                            </form>
-
-
-
-                            <!-- Modal -->
-                            <div class="modal fade" id="mosalPublish" role="dialog">
-                                <div class="modal-dialog">
-
-                                    <!-- Modal content-->
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                            <h4 class="modal-title">Modal Header</h4>
-                                        </div>
-                                        <div class="modal-body">
-                                            <p>Some text in the modal.</p>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-
                         </div>
-
                     </div>
                 </div>
             </div>

@@ -1,10 +1,9 @@
 <div class="container">
     <div class="row my-4">
         <div class="col">
-
-            <h3 class="title"><?php echo $tugas_akhir[0]['judul']; ?></h3>
+            <h3 class="title color-utama"><?php echo $tugas_akhir[0]['judul']; ?></h3>
             <p><strong><?php echo $tugas_akhir[0]['name']; ?>,<?php echo $tugas_akhir[0]['pembimbing']; ?> </p>
-            <?php echo $tugas_akhir[0]['tahun']; ?>| Tugas Akhir | D3 <?php echo $tugas_akhir[0]['program_studi']; ?></strong>
+            <?php echo $tugas_akhir[0]['tahun']; ?>| <?php echo $tugas_akhir[0]['program_studi']; ?></strong>
         </div>
 
     </div>
@@ -13,13 +12,13 @@
         <div class="col-lg-12">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="abstrak" aria-selected="true">Abstrak</a>
+                    <a class="nav-link color-utama active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="abstrak" aria-selected="true">Abstrak</a>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="file" aria-selected="false">File PDF</a>
+                    <a class="nav-link color-utama" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="file" aria-selected="false">File PDF</a>
                 </li>
                 <li class="nav-item text-right" role="presentation">
-                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="demo" aria-selected="false">Demo</a>
+                    <a class="nav-link color-utama" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="demo" aria-selected="false">Demo</a>
                 </li>
             </ul>
             <div class="tab-content" id="myTabContent">
@@ -37,7 +36,8 @@
                             <li class="list-group-item">
 
                                 <?php echo $files['name']; ?>
-                                <a href="<?php echo base_url('publik/download/') .  $files['name']; ?>"> <i class=" fas fa-fw fa-download"></i></a>
+                                <a href="<?php echo base_url('publik/preview/') .  $files['id']; ?>" target="_blank"> <i class=" fas fa-fw fa-eye color-sekunder"></i></a>
+                                <a href="<?php echo base_url('publik/download/') .  $files['name']; ?>"> <i class=" fas fa-fw fa-download color-sekunder"></i></a>
 
                             </li>
                         <?php endforeach;
@@ -48,12 +48,10 @@
                 <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
                     <div class="mx-auto my-5" style="width: 200px;">
                         <?= $tugas_akhir[0]['id'] ?>
-                        <a class="btn btn-danger" href="<?= base_url('publik/demo/') . $tugas_akhir[0]['ta_id']; ?>">Demo Aplikasi</a>
+                        <a class="btn btn-danger" target="_blank" href="<?= base_url('publik/demo/') . $tugas_akhir[0]['ta_id']; ?>">Demo Aplikasi</a>
                     </div>
                 </div>
             </div>
         </div>
-
-
-        </>
     </div>
+</div>

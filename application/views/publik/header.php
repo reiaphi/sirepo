@@ -17,9 +17,10 @@
 
     <!-- Custom styles for this template-->
     <link href="<?= base_url('assets/'); ?>css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="<?= base_url('assets/'); ?>css/custom.css" rel="stylesheet">
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Repositori</a>
+    <nav class="navbar navbar-expand-lg navbar-light bgcolor-sekunder">
+        <a class="navbar-brand text-white" href="#">Repositori</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -27,13 +28,13 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="<?php echo base_url('publik/home/'); ?>">Home</span></a>
+                    <a class="nav-link text-white" href="<?php echo base_url('publik/home/'); ?>">Home</span></a>
                 </li>
 
 
             </ul>
         </div>
-        <a class="navbar-brand" href="<?= base_url('publik/gotoLogin'); ?>">Login </a>
+        <a class="navbar-brand text-white" href="<?= base_url('publik/gotoLogin'); ?>">Login </a>
 
     </nav>
 </head>

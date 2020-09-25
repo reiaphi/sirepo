@@ -122,7 +122,7 @@ class M_mahasiswa extends CI_Model
     public function cek_data_file($id)
     {
         $this->db->get_where('file', ['user_id' => $id])->row_array();
-        if ($this->count_file($id) > 3) {
+        if ($this->count_file($id) > 7) {
             return true;
         } else {
             return false;

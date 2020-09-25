@@ -4,12 +4,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title><?= $file->name; ?></title>
+
+
 </head>
 
 <body>
 
-  <embed type="application/pdf" src="<?= base_url("uploads/") . $file->name; ?>" width="100%" height="100%">
+  <embed type="application/pdf" src="<?= base_url("uploads/") . $file->name; ?>" style="height:100vh;" width="100%">
 
 </body>
 

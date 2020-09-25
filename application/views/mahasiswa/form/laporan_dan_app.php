@@ -82,7 +82,7 @@
                                         <?php
                                         echo $files['name'];
                                         ?>
-                                        <a href="<?php echo base_url('publik/download/') .  $files['name']; ?>"> <i class=" fas fa-fw fa-eye"></i></a>
+                                        <a href="<?php echo base_url('publik/preview/') .  $files['id']; ?>"> <i class=" fas fa-fw fa-eye"></i></a>
                                     <?php endforeach;
                                     ?>
                             </ul>

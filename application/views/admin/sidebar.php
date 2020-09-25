@@ -2,7 +2,7 @@
  <div id="wrapper">
 
    <!-- Sidebar -->
-   <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+   <ul class="navbar-nav bgcolor-utama sidebar sidebar-dark accordion" id="accordionSidebar">
 
      <!-- Sidebar - Brand -->
      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?= base_url('user'); ?>">
@@ -36,7 +36,10 @@
          <i class="fas fa-fw fa-tasks"></i>
          <span>Data Mahasiswa</span>
        </a>
-
+       <a class="nav-link collapsed" href="<?= base_url('admin/data_file_aplikasi'); ?>">
+         <i class="fas fa-fw fa-tasks"></i>
+         <span>Data File Aplikasi</span>
+       </a>
      </li>
      <!-- Divider -->
      <hr class="sidebar-divider">

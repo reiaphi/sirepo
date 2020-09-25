@@ -22,16 +22,18 @@ class Publik extends CI_Controller
         //pagination 
         $this->load->library('pagination');
 
-
         if ($this->input->post('submit')) {
             $data['keyword'] = $this->input->post('keyword');
+            $data['sort'] = $this->input->post('sort');
             $this->session->set_userdata('keyword', $data['keyword']);
+            $this->session->set_userdata('sort', $data['sort']);
             echo $data['keyword'];
         } else {
             $data['keyword'] = $this->session->userdata('keyword');
+            $data['sort'] = $this->session->userdata('sort');
         }
 
-        //config
+        //config pencarian
         if (!empty($data['keyword'])) {
             $this->db->group_start();  //group start
             $this->db->like('judul', $data['keyword']);
@@ -40,22 +42,20 @@ class Publik extends CI_Controller
             $this->db->from('tugas_akhir');
             $this->db->where('status_id', 3);
             $this->db->join('mahasiswa', 'mahasiswa.user_id = tugas_akhir.user_id');
+            $this->db->order_by('tahun', $data['sort']);
             $this->db->group_end();  //group ed
             $config['total_rows'] = $this->db->count_all_results();
         } else {
             $config['total_rows'] = $this->m_publik->count_ta();
         }
-        $config['per_page'] = 1;
-
+        $config['per_page'] = 3;
         //initialize
         $this->pagination->initialize($config);
         $data['start'] = $this->uri->segment(3);
-
         $data['user'] = $this->db->get_where('user', ['id' => $this->session->userdata('id')])->row_array();
-        $data['tugas_akhir'] = $this->m_publik->show_tugas_akhir($config['per_page'], $data['start'], $data['keyword']);
+        $data['tugas_akhir'] = $this->m_publik->show_tugas_akhir($config['per_page'], $data['start'], $data['keyword'], $data['sort']);
         $this->load->view('publik/header.php', $data);
         $this->load->view('publik/home.php', $data);
-        //$this->load->view('publik/test.php');
         $this->load->view('publik/footer.php');
     }
     public function home()
@@ -112,7 +112,7 @@ class Publik extends CI_Controller
     {
 
         $data['file'] = $this->db->get_where('file', ['id' => $id])->row();
-        var_dump($data);
+        //var_dump($data);
         return  $this->load->view('file.php', $data);
     }
 }

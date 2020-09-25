@@ -46,12 +46,26 @@
                                 </div>
                             </div>
                             <div class="form-group row">
+                                <label for="fakultas" class="col-sm-2 col-form-label">Jenjang</label>
+                                <div class="col-sm-10">
+
+                                    <select class="custom-select mr-sm-2" id="fakultas" name="jenjang">
+                                        <option selected>Choose...</option>
+                                        <option value="D3">D3</option>
+                                        <option value="D4">D4</option>
+                                        <option value="S1">S1</option>
+
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label for="fakultas" class="col-sm-2 col-form-label">Fakultas</label>
                                 <div class="col-sm-10">
 
                                     <select class="custom-select mr-sm-2" id="fakultas" name="fakultas">
                                         <option selected>Choose...</option>
                                         <option value="Matematika dan Ilmu Alam">Mipa</option>
+                                        <option value="Sekolah Vokasi">Sekolah Vokasi</option>
 
                                     </select>
                                 </div>
@@ -62,7 +76,9 @@
 
                                     <select class="custom-select mr-sm-2" id="program_studi" name="program_studi" value="<?php echo $mahasiswa->program_studi; ?>">
                                         <option selected>Choose...</option>
-                                        <option value="S1 Ilmu Komputer">Ilmu Komputer</option>
+                                        <option value="Ilmu Komputer">Ilmu Komputer</option>
+                                        <option value="Komputer dan Sistem Informasi">Komputer dan Sistem Informasi</option>
+
 
                                     </select>
                                 </div>
