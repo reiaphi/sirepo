@@ -45,13 +45,18 @@
 
        <!-- Nav Item - Charts -->
      <li class="nav-item">
+       <a class="nav-link" href="<?= base_url('mahasiswa/docker_guide/'); ?>">
+         <i class="fab fa-docker"></i>
+         <span>Konfigurasi Docker</span></a>
+     </li>
+     <li class="nav-item">
        <a class="nav-link" href="<?= base_url('mahasiswa/status_data/'); ?>">
-         <i class=" fas fa-fw fa-user"></i>
+         <i class=" fas fa-fw fa-bell"></i>
          <span>Status Data</span></a>
      </li>
      <li class="nav-item">
        <a class="nav-link" href="<?= base_url('publik'); ?>">
-         <i class=" fas fa-fw fa-user"></i>
+         <i class=" fas fa-fw fa-eye"></i>
          <span>Preview</span></a>
      </li>
 

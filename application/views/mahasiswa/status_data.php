@@ -44,11 +44,13 @@
                             <td>File Laporan</td>
                             <td>
                                 <?php $x = 0; ?>
-                                <?php foreach ($file_laporan as $data) : ?>
-                                    <?php if ($data['status'] == 3) : ?>
-                                        <?php $x++; ?>
-                                    <?php endif; ?>
-                                <?php endforeach; ?>
+                                <?php if ($file_laporan) : ?>
+                                    <?php foreach ($file_laporan as $data) : ?>
+                                        <?php if ($data['status'] == 3) : ?>
+                                            <?php $x++; ?>
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
                                 <?php if ($x < 7) : ?>
                                     Unggah lagi
                                 <?php endif; ?>

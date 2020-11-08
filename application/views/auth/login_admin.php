@@ -1,4 +1,4 @@
-<body>
+<body class="bg-gradient-primary">
 
     <div class="container">
         <!-- Outer Row -->
@@ -27,7 +27,7 @@
                                         <?php if ($this->session->flashdata('message')) : ?>
                                             <div class="alert alert-danger" role="alert"> Your username or password is wrong </div>
                                         <?php endif; ?>
-                                        <button type="submit" class="btn btn-info btn-user btn-block">
+                                        <button type="submit" class="btn btn-primary btn-user btn-block">
                                             Login
                                         </button>
 

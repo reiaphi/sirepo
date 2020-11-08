@@ -2,6 +2,12 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Data</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Data Mahasiswa</li>
+        </ol>
+    </nav>
     <h3 class="mb-2 color-utama">Data Tugas Akhir Mahasiswa</h3>
 
     <!-- DataTales Example -->

@@ -179,7 +179,6 @@
                 </div>
             </div>
         </div>
-
         <!-- Collapsable Card Example -->
         <div class="widget-timeline-item">
             <div class="widget-timeline-info">
@@ -192,23 +191,80 @@
                 </a>
                 <!-- Card Content - Collapse -->
                 <div class="collapse show" id="collapseCardThree" data-parent="#accordion">
-                    <div class="row card-body form-inline">
-                        <div style="color: red;"><?php echo (isset($message)) ? $message : ""; ?></div>
-                        <?php echo form_open("mahasiswa/insert_to_file_laporan", array('enctype' => 'multipart/form-data')); ?>
-                        <input type="file" name="input_file" class="form-control"></input>
-                        <input type="submit" name="submit" value="Simpan">
-                        <?php echo form_close(); ?>
-                    </div>
-                    <!-- chrome gabisa ngeread filename nya -->
-                    <div class="row card-body form-inline">
-                        <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="customFile">
-                            <label class="custom-file-label" for="customFile">Choose file</label>
+                    <div class="card-body">
+                        <div class="row-inline">
+                            <div class="alert alert-danger" role="alert">
+                                <p>Pastikan ada 7 file dengan nama yang sudah sesuai ketentuan!</p>
+                                <p> Tahun-NIM(6 digit)-namafile</p>
+                                <p>contoh:2020-123456-abstract.pdf</p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <ul class="list-group text-left m-3">
+                                <p>file yang sudah terunggah:</p>
+                                <?php if (is_array($file) || is_object($file)) : ?>
+                                    <?php foreach ($file as $files) :                                ?>
+                                        <li class="list-group-item">
+                                            <?php if ($files) {
+                                                echo $files['name'];
+                                            }
+                                            ?>
+                                            <a href="<?php echo base_url('publik/preview/') .  $files['id']; ?>"> <i class=" fas fa-fw fa-eye"></i></a>
+                                        <?php endforeach;
+                                        ?>
+                                    <?php endif; ?>
+
+                            </ul>
+                        </div>
+                        <div class="row ">
+                            <a href="#" class="btn btn-info btn-icon-split m-3" data-toggle="modal" data-target="#addUser">
+                                <span class="icon text-white-50">
+                                    <i class="fas fa-plus"></i>
+                                </span>
+                                <span class="text">Tambah File</span>
+                            </a>
+                            <!-- Modal -->
+                            <div class="modal fade" id="addUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">FORM TAMBAH FILE</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div style="color: red;"><?php echo (isset($message)) ? $message : ""; ?></div>
+                                            <?php echo form_open("mahasiswa/insert_to_file_laporan", array('enctype' => 'multipart/form-data')); ?>
+                                            <div class="form-group">
+                                                <label>Kategori</label>
+                                                <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+                                                    <option selected>Choose...</option>
+                                                    <option value="1">One</option>
+                                                    <option value="2">Two</option>
+                                                    <option value="3">Three</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Pilih File</label>
+                                                <input class="my-1" type="file" name="input_file" class="form-control"></input>
+                                            </div>
+                                            <input class="btn btn-info" type="submit" name="submit" value="Upload">
+                                            <?php echo form_close(); ?>
+
+
+                                        </div>
+                                        <div class="modal-footer">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
         <!-- Collapsable Card Example -->
         <div class="widget-timeline-item">
@@ -231,23 +287,13 @@
                     </div>
                 </div>
             </div>
-
         </div>
         <div class="widget-timeline-item">
             <div class="widget-timeline-info">
                 <div class="widget-timeline-icon bg-info"><b></b></div>
             </div>
         </div>
-
     </div>
-
     <!-- </div> -->
 </div>
-
-
-
-
-
-
-
 <!-- End of Main Content -->

@@ -19,7 +19,7 @@
     <link href="<?= base_url('assets/'); ?>css/sb-admin-2.min.css" rel="stylesheet">
     <link href="<?= base_url('assets/'); ?>css/custom.css" rel="stylesheet">
 
-    <nav class="navbar navbar-expand-lg navbar-light bgcolor-sekunder">
+    <nav class="navbar navbar-expand-lg navbar-light bgcolor-sekunder" style="background-color: #2496ed;">
         <a class="navbar-brand text-white" href="#">Repositori</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -39,4 +39,4 @@
     </nav>
 </head>
 
-<body id="page-top">
+<body id="page-top" style="background-color: #f0f1f3;">

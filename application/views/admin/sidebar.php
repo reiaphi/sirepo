@@ -2,7 +2,7 @@
  <div id="wrapper">
 
    <!-- Sidebar -->
-   <ul class="navbar-nav bgcolor-utama sidebar sidebar-dark accordion" id="accordionSidebar">
+   <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
      <!-- Sidebar - Brand -->
      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?= base_url('user'); ?>">
@@ -33,11 +33,15 @@
      <!-- Nav Item - Pages Collapse Menu -->
      <li class="nav-item">
        <a class="nav-link collapsed" href="<?= base_url('admin/data_mahasiswa'); ?>">
-         <i class="fas fa-fw fa-tasks"></i>
+         <i class="fas fa-fw fa-database"></i>
          <span>Data Mahasiswa</span>
        </a>
+       <a class="nav-link collapsed" href="<?= base_url('admin/data_laporan'); ?>">
+         <i class="fab fa-docker"></i>
+         <span>Data File Laporan</span>
+       </a>
        <a class="nav-link collapsed" href="<?= base_url('admin/data_file_aplikasi'); ?>">
-         <i class="fas fa-fw fa-tasks"></i>
+         <i class="fas fa-fw fa-file"></i>
          <span>Data File Aplikasi</span>
        </a>
      </li>
@@ -90,8 +94,17 @@
          <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
            <i class="fa fa-bars"></i>
          </button>
-
-
+         <!-- Topbas Search-->
+         <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+           <div class="input-group">
+             <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+             <div class="input-group-append">
+               <button class="btn btn-primary" type="button">
+                 <i class="fas fa-search fa-sm"></i>
+               </button>
+             </div>
+           </div>
+         </form>
 
          <!-- Topbar Navbar -->
          <ul class="navbar-nav ml-auto">

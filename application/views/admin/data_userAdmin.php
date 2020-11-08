@@ -2,6 +2,12 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Setting</a></li>
+            <li class="breadcrumb-item active" aria-current="page">User Admin</li>
+        </ol>
+    </nav>
     <h1 class="h3 mb-2 text-gray-800">Data User</h1>
 
     <!-- Data Administrator -->

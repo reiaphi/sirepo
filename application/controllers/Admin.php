@@ -120,6 +120,18 @@ class Admin extends CI_Controller
 		$where = array('id' => $id);
 		$this->m_admin->hapus_data($where, 'user');
 	}
+	public function data_laporan($id)
+	{
+		$data = array();
+		$data['title'] = 'Administrator';
+		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
+		$data['file_laporan'] = $this->m_admin->get_file($id);
+		$data['mahasiswa'] = $this->m_admin->get_mhs($id);
+		$this->load->view('admin/header.php', $data);
+		$this->load->view('admin/sidebar.php');
+		$this->load->view('admin/data_laporan.php');
+		$this->load->view('admin/footer');
+	}
 
 	public function action_ta($id)
 	{
@@ -153,7 +165,7 @@ class Admin extends CI_Controller
 			$this->m_admin->update_data($where, $data, 'file');
 			redirectPreviousPage();
 		} elseif ($_POST['action'] == 'declined') {
-			$this->db->delete('file', array('id' => $id));  // Produces: // DELETE FROM mytable  // WHERE id = $id
+			$this->db->delete('file', array('id' => $id));
 			redirectPreviousPage();
 		}
 	}

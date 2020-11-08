@@ -57,6 +57,22 @@ class Mahasiswa extends CI_Controller
         $this->load->view('mahasiswa/tugas_akhir_saya.php', $data);
         $this->load->view('mahasiswa/footer');
     }
+    public function docker_guide()
+    {
+        $data = array();
+        $data['title'] = 'Mahasiswa';
+        $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
+        $data['ta_saya'] = $this->get_ta_saya();
+        $data['penulis'] = $this->get_nama_mahasiswa();
+        $data['file'] = $this->get_file();
+        $data['file_aplikasi'] = $this->db->get_where('file_aplikasi', ['user_id' => $this->session->userdata('id')])->row();
+        var_dump($data['file_aplikasi']);
+
+        $this->load->view('mahasiswa/header.php', $data);
+        $this->load->view('mahasiswa/sidebar.php');
+        $this->load->view('mahasiswa/docker_guide.php');
+        $this->load->view('mahasiswa/footer');
+    }
     private function get_ta_saya()
     {
         $query = $this->db->get_where('tugas_akhir', ['user_id' => $this->session->userdata('id')])->row();
@@ -72,7 +88,11 @@ class Mahasiswa extends CI_Controller
     {
         $this->db->select('*');
         $query = $this->db->get_where('file', ['user_id' => $this->session->userdata('id')])->result_array();
-        return $query;
+        if ($query) {
+            return $query;
+        } else {
+            $query = "belum ada";
+        }
     }
     public function insert_to_mahasiswa()
     {
@@ -223,6 +243,7 @@ class Mahasiswa extends CI_Controller
                 }
             } else {
                 //keluarkan form untuk upload lagi 
+
                 $this->load->view('mahasiswa/form/laporan_dan_app.php');
             }
         }

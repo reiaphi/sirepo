@@ -1,8 +1,8 @@
 <!-- Footer -->
-<footer class="sticky-footer">
+<footer class="sticky-footer" style="background-color: #f0f1f3;">
     <div class="container my-auto">
         <div class="copyright text-center my-auto">
-            <span>Copyright &copy; Sistem Repositori 2010</span>
+            <span>Copyright &copy; Sistem Repositori 2020</span>
         </div>
     </div>
 </footer>

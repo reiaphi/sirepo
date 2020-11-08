@@ -1,6 +1,15 @@
 <div class="container-fluid">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Data</a></li>
+            <li class="breadcrumb-item"><a href="<?= site_url('admin/data_file_aplikasi') ?>">Data Aplikasi</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Detail</li>
+        </ol>
+    </nav>
     <div class="card shadow m-3">
+
         <div class="card-header">
+
             <h6 class="m-0 font-weight-bold color-utama">Data Status </h6>
         </div>
         <div class="card-body">
