@@ -25,10 +25,12 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td><?php echo $file_app->name; ?></td>
-                            <td><?php echo "null" ?></td>
-                            <td><?php echo "belum ada"; ?></td>
-                            <td><?php echo "belum ada"; ?></td>
+                            <td><?php echo $file_app->name; ?>
+                                <a href="<?php echo base_url('admin/download/') .  $file_app->name; ?>"> <i class=" fas fa-fw fa-download"></i></a>
+                            </td>
+                            <td><?php echo $file_app->port; ?></td>
+                            <td><?php echo $file_app->status; ?></td>
+                            <td><?php echo $file_app->notes; ?></td>
                         </tr>
                     </tbody>
                 </table>
@@ -37,26 +39,42 @@
     </div>
     <div class="row">
         <div class="col col-md-5">
-            <div class="card shadow ml-3">
+            <div class="card shadow m-3">
                 <div class="card-header">
                     <h6 class="m-0 font-weight-bold color-utama">Input Port </h6>
                 </div>
                 <div class="card-body">
-                    <form method="POST" href="#">
+                    <form method="POST" action="<?= base_url('admin/update_port_app/') . $file_app->id; ?>">
                         <div class="form-group">
-                            <input class="form-control" type="text" placeholder="input link port">
+                            <input name="port" class="form-control" type="text" placeholder="input link port">
                         </div>
 
-                        <a class="btn btn-success text-light" type="submit">submit</a>
+                        <button class="btn btn-success text-light" type="submit">submit</button>
+
+                    </form>
+                </div>
+            </div>
+            <div class="card shadow m-3">
+                <div class="card-header">
+                    <h6 class="m-0 font-weight-bold color-utama">Notes </h6>
+                </div>
+                <div class="card-body">
+                    <form method="POST" action="<?= base_url('admin/update_note_app/') . $file_app->id; ?>">
+
+                        <div class="form-group">
+                            <textarea name="note" class="form-control" aria-label="With textarea" style="height: 100px;" placeholder="ketik sesuatu .."></textarea>
+                        </div>
+
+                        <button class="btn btn-success text-light" type="submit">submit</button>
 
                     </form>
                 </div>
             </div>
         </div>
         <div class="col">
-            <div class="card shadow mr-3 mb-3">
+            <div class="card shadow mr-3 my-3">
                 <div class="card-header">
-                    <h6 class="m-0 font-weight-bold color-utama">Send Notes </h6>
+                    <h6 class="m-0 font-weight-bold color-utama">Send Email </h6>
                 </div>
                 <div class="card-body">
                     <form method="POST" href="#">

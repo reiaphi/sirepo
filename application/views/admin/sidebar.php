@@ -36,10 +36,7 @@
          <i class="fas fa-fw fa-database"></i>
          <span>Data Mahasiswa</span>
        </a>
-       <a class="nav-link collapsed" href="<?= base_url('admin/data_laporan'); ?>">
-         <i class="fab fa-docker"></i>
-         <span>Data File Laporan</span>
-       </a>
+
        <a class="nav-link collapsed" href="<?= base_url('admin/data_file_aplikasi'); ?>">
          <i class="fas fa-fw fa-file"></i>
          <span>Data File Aplikasi</span>

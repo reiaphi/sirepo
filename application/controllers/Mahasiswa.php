@@ -24,8 +24,9 @@ class Mahasiswa extends CI_Controller
         $data['file'] = $this->get_file();
         $this->load->view('mahasiswa/header.php', $data);
         $this->load->view('mahasiswa/sidebar.php');
+        $this->load->view('mahasiswa/main.php');
         // $this->load->view('mahasiswa/temp.php');
-        $this->load_view_form($this->session->userdata('id'));
+        //$this->load_view_form($this->session->userdata('id'));
         $this->load->view('mahasiswa/footer');
     }
 
@@ -57,22 +58,8 @@ class Mahasiswa extends CI_Controller
         $this->load->view('mahasiswa/tugas_akhir_saya.php', $data);
         $this->load->view('mahasiswa/footer');
     }
-    public function docker_guide()
-    {
-        $data = array();
-        $data['title'] = 'Mahasiswa';
-        $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
-        $data['ta_saya'] = $this->get_ta_saya();
-        $data['penulis'] = $this->get_nama_mahasiswa();
-        $data['file'] = $this->get_file();
-        $data['file_aplikasi'] = $this->db->get_where('file_aplikasi', ['user_id' => $this->session->userdata('id')])->row();
-        var_dump($data['file_aplikasi']);
 
-        $this->load->view('mahasiswa/header.php', $data);
-        $this->load->view('mahasiswa/sidebar.php');
-        $this->load->view('mahasiswa/docker_guide.php');
-        $this->load->view('mahasiswa/footer');
-    }
+
     private function get_ta_saya()
     {
         $query = $this->db->get_where('tugas_akhir', ['user_id' => $this->session->userdata('id')])->row();
@@ -150,15 +137,35 @@ class Mahasiswa extends CI_Controller
     }
     public function insert_to_file_laporan()
     {
-
         $data = array();
+        $data['kategori'] = $this->input->post('kategori');
+        $data['file'] = "null";
+        if ($this->input->post('kategori') == 1) {
+            $data['file'] = "Halaman Judul";
+        } elseif ($this->input->post('kategori') == 2) {
+            $data['file'] = "Abstrak";
+        } elseif ($this->input->post('kategori') == 3) {
+            $data['file'] = "Daftar Isi";
+        } elseif ($this->input->post('kategori') == 4) {
+            $data['file'] = "Pendahuluan";
+        } elseif ($this->input->post('kategori') == 5) {
+            $data['file'] = "Penutup";
+        } elseif ($this->input->post('kategori') == 6) {
+            $data['file'] = "Daftar Pustaka";
+        } elseif ($this->input->post('kategori') == 7) {
+            $data['file'] = "Fulltext";
+        }
+        $data['mahasiswa'] = $this->db->get_where('mahasiswa', ['user_id' => $this->session->userdata('id')])->row();
+
+        $data['nama_file'] = $data['mahasiswa']->tahun . "-" . $data['mahasiswa']->nim . "-" . $data['file'];
+
         if ($this->input->post('submit')) { // Jika user menekan tombol Submit (Simpan) pada form
             // lakukan upload file dengan memanggil function upload yang ada di model
-            $upload = $this->m_mahasiswa->upload();
+            $upload = $this->m_mahasiswa->upload($data['nama_file']);
 
             if ($upload['result'] == "success") { // Jika proses upload sukses
                 // Panggil function save yang ada di model untuk menyimpan data ke database
-                $this->m_mahasiswa->save($upload, 'file');
+                $this->m_mahasiswa->save($upload, $data['kategori']);
 
                 redirect('mahasiswa'); // Redirect kembali ke halaman awal / halaman view data
             } else { // Jika proses upload gagal
@@ -170,12 +177,18 @@ class Mahasiswa extends CI_Controller
     }
     public function insert_to_file_aplikasi()
     {
+
         $data = array();
+
         if ($this->input->post('submit')) { // Jika user menekan tombol Submit (Simpan) pada form
+            // lakukan upload file dengan memanggil function upload yang ada di model
             $upload = $this->m_mahasiswa->upload_zip();
+
             if ($upload['result'] == "success") { // Jika proses upload sukses
-                $this->m_mahasiswa->save_zip($upload, 'file_aplikasi');
-                redirectPreviousPage();
+                // Panggil function save yang ada di model untuk menyimpan data ke database
+                $this->m_mahasiswa->save_zip($upload);
+
+                redirect('mahasiswa'); // Redirect kembali ke halaman awal / halaman view data
             } else { // Jika proses upload gagal
                 $data['message'] = $upload['error']; // Ambil pesan error uploadnya untuk dikirim ke file form dan ditampilkan
             }
@@ -225,31 +238,5 @@ class Mahasiswa extends CI_Controller
         $this->m_mahasiswa->input_data($data_mhs, 'mahasiswa');
         $this->m_mahasiswa->input_data($data_tugas_akhir, 'tugas_akhir');
         redirectPreviousPage();
-    }
-    public function load_view_form($id)
-    {
-
-        //jika datanya sudah ada
-        if ($this->m_mahasiswa->cek_data($id)) {
-            //cek data file
-            if ($this->m_mahasiswa->cek_data_file($id)) {
-                //cek file aplikasi 
-                if ($this->m_mahasiswa->cek_file_app($id)) {
-                    //semua form sudah terisi
-                    $this->load->view('mahasiswa/form/done.php');
-                } else {
-                    //keluarkan datanya dan form upload file aplikasi
-                    $this->load->view('mahasiswa/form/file_app.php');
-                }
-            } else {
-                //keluarkan form untuk upload lagi 
-
-                $this->load->view('mahasiswa/form/laporan_dan_app.php');
-            }
-        }
-        //tampikan 
-        else {
-            $this->load->view('mahasiswa/temp.php');
-        }
     }
 }

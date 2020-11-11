@@ -6,8 +6,8 @@
 
      <!-- Sidebar - Brand -->
      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?= base_url('user'); ?>">
-       <div class="sidebar-brand-icon rotate-n-15">
-         <i class="fas fa-code"></i>
+       <div class="sidebar-brand-icon ">
+         <i class="fas fa-user-graduate"></i>
        </div>
        <div class="sidebar-brand-text mx-3">Mahasiswa</div>
      </a>
@@ -18,8 +18,8 @@
      <!-- Nav Item - Dashboard -->
      <li class="nav-item">
        <a class="nav-link" href="<?= base_url('user'); ?>">
-         <i class="fas fa-fw fa-tachometer-alt"></i>
-         <span>Dashboard</span></a>
+         <i class="fas fa-fw fa-tasks"></i>
+         <span>Unggah</span></a>
      </li>
 
      <!-- Divider -->
@@ -30,25 +30,20 @@
      <!-- Nav Item - Pages Collapse Menu -->
      <li class="nav-item">
        <a class="nav-link collapsed" href="<?= base_url('mahasiswa/tugas_akhir_saya/'); ?> ">
-         <i class="fas fa-fw fa-cog"></i>
+         <i class="fas fa-fw fa-file"></i>
          <span>Tugas Akhir Saya</span>
        </a>
-
-       <!-- Divider -->
-       <hr class="sidebar-divider">
-
-       <!-- Heading -->
-       <div class="sidebar-heading">
-         Profile
-       </div>
-
-
-       <!-- Nav Item - Charts -->
-     <li class="nav-item">
-       <a class="nav-link" href="<?= base_url('mahasiswa/docker_guide/'); ?>">
-         <i class="fab fa-docker"></i>
-         <span>Konfigurasi Docker</span></a>
      </li>
+     <!-- Divider -->
+     <hr class="sidebar-divider">
+
+     <!-- Heading -->
+     <div class="sidebar-heading">
+       Profile
+     </div>
+
+
+
      <li class="nav-item">
        <a class="nav-link" href="<?= base_url('mahasiswa/status_data/'); ?>">
          <i class=" fas fa-fw fa-bell"></i>

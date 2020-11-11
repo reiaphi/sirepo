@@ -57,9 +57,7 @@
                 <!-- Card Content - Collapse -->
                 <div class="collapse" id="collapseCardExample">
                     <div class="card-body">
-                        <?php if (isset($ta)) {
-                            echo "<p>Data tidak ditemukan</p>";
-                        } ?>
+
                         <?php if ($ta) : ?>
                             <div class="row">
                                 <div class="col col-md-2 "><strong>Judul</strong></div>
@@ -118,33 +116,38 @@
                                     <th scope="col">Nama File</th>
                                     <th scope="col">Kategori</th>
                                     <th scope="col">Akses</th>
+                                    <th scope="col">Status</th>
                                     <th scope="col">Aprove</th>
                                 </tr>
                             </thead>
                             <tbody>
 
-                                <?php if (isset($file)) {
-                                    echo "<tr><td>Data tidak ditemukan<td></tr>";
-                                } ?>
-                                <?php foreach ($file as $files) :
-                                ?>
-                                    <tr>
-                                        <td><?= $files['name']; ?>
-                                            <a href="<?php echo base_url('publik/preview/') .  $files['id']; ?>"> <i class=" fas fa-fw fa-eye"></i></a>
-                                        </td>
-                                        <td>Absta</td>
-                                        <td>@mdo</td>
-                                        <td>
-                                            <a href="#" class="btn btn-success btn-circle btn-sm">
-                                                <i class="fas fa-check"></i>
-                                            </a>
-                                            <a href="#" class="btn btn-danger btn-circle btn-sm">
-                                                <i class="fas fa-times"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                <?php endforeach; ?>
 
+                                <?php if (!empty($file)) : ?>
+                                    <?php foreach ($file as $files) :
+                                    ?>
+                                        <tr>
+                                            <td><?= $files['name']; ?>
+                                                <a href="<?php echo base_url('publik/preview/') .  $files['id']; ?>"> <i class=" fas fa-fw fa-eye"></i></a>
+                                            </td>
+                                            <td><?= $files['kategori']; ?></td>
+                                            <td><?php if ($files['kategori'] == 2 || $files['kategori'] == 3 || $files['kategori'] == 6) {
+                                                    echo "Publik";
+                                                } else {
+                                                    echo "Private";
+                                                } ?></td>
+                                            <td><?= $files['status']; ?></td>
+                                            <td>
+                                                <a href="<?= base_url('admin/aprove_file/') . $files['id']; ?>" class="btn btn-success btn-circle btn-sm">
+                                                    <i class="fas fa-check"></i>
+                                                </a>
+                                                <a href="<?= base_url('admin/decline_file/') . $files['id']; ?>" class="btn btn-danger btn-circle btn-sm">
+                                                    <i class="fas fa-times"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
 
 
                             </tbody>
@@ -161,64 +164,33 @@
             <div class="card shadow mb-4">
                 <!-- Card Header - Accordion -->
                 <a href="#collapseCardExample2" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseCardExample">
-                    <h6 class="m-0 font-weight-bold text-primary">File Laporan</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Sending Email</h6>
                 </a>
                 <!-- Card Content - Collapse -->
                 <div class="collapse" id="collapseCardExample2">
                     <div class="card-body">
 
-                        <?php if ($file) : ?>
-                            <?php foreach ($file as $files) :
-                            ?>
-                                <div class="row">
-                                    <div class="col">
-                                        <?= $files['name']; ?>
-                                        <a href="<?php echo base_url('publik/preview/') .  $files['id']; ?>"> <i class=" fas fa-fw fa-eye"></i></a>
+                        <form method="POST" action="<?= base_url('admin/send_email/') . $mahasiswa->id; ?>">
+                            <fieldset disabled="disabled">
+                                <div class="input-group mb-1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="email">to:</span>
                                     </div>
-                                    <div class="col align-items-center">
-                                        <input type="checkbox" name="check" value="Public">Publik </input>
-                                        <input type="submit" name="action" value="aprove" class="btn btn-success btn-icon-split m-2" />
-                                        <input type="submit" name="action" value="declined" class="btn btn-danger btn-icon-split m-2" />
-                                    </div>
-
-
-                                    <!-- <?php if ($files['status'] == 1) : ?>
-                                                <form method="POST" action="<?= base_url('admin/action_file/') . $files['id']; ?>">
-                                                    <div class="input-group mb-3">
-                                                        ? -->
-                                    <!-- <select class="custom-select" id="inputGroupSelect01" name="kategori_file">
-                                                            <option selected>Choose...</option>
-                                                            <option value="1">Judul</option>
-                                                            <option value="2">Abstrak/Intisari & Abstact</option>
-                                                            <option value="3">Daftar Isi</option>
-                                                            <option value="4">Pendahuluan</option>
-                                                            <option value="5">Penutup/Kesimpulan</option>
-                                                            <option value="6">Daftar Pustaka</option>
-                                                            <option value="7">Fulltext</option>
-                                                        </select> -->
-                                    <!-- </div> -->
-
-                                    <!-- </form> -->
-                                <?php endif; ?>
+                                    <input type="text" class="form-control disable" id="disabledTextInput" placeholder="<?php echo $mahasiswa->email; ?>" aria-label="Username" aria-describedby="email">
                                 </div>
-                            <?php endforeach;
-                            ?>
-                        <?php elseif (!$file) : ?>
-                            <p>tidak ada data</p>
-                        <?php endif; ?>
+                            </fieldset>
+                            <div class="form-group">
+                                <textarea name="messageEmail" class="form-control" aria-label="With textarea" style="height: 300px;" placeholder="ketik sesuatu .."></textarea>
+                            </div>
 
+                            <button type="submit" class="btn btn-warning btn-icon-split m-2">
+                                <span class="icon text-white-50">
+                                    <i class="fas fa-envelope "></i>
+                                </span>
+                                <span class="text">send email</span>
+                            </button>
+                        </form>
 
-                        <div class="row">
-                            <?= $mahasiswa->id; ?>
-                            <form method="POST" action="<?= base_url('admin/send_email/') . $mahasiswa->id; ?>">
-                                <button type="submit" class="btn btn-warning btn-icon-split m-2">
-                                    <span class="icon text-white-50">
-                                        <i class="fas fa-envelope "></i>
-                                    </span>
-                                    <span class="text">send email</span>
-                                </button>
-                            </form>
-                        </div>
                     </div>
                 </div>
             </div>

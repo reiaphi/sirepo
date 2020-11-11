@@ -89,6 +89,21 @@ class M_publik extends CI_Model
         //var_dump($results);
         return $results;
     }
+    public function get_link_port($id)
+    {
+        $results = array();
+        $this->db->select('*');
+        $this->db->from('mahasiswa');
+        $this->db->join('file_aplikasi', 'mahasiswa.user_id = file_aplikasi.user_id');
+        $this->db->where('file_aplikasi.status', 3);
+        $this->db->where('mahasiswa.id', $id);
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            $results = $query->result_array();
+        }
+        //var_dump($results);
+        return $results;
+    }
     public function show_ta($id)
     {
         $results = array();
@@ -107,7 +122,7 @@ class M_publik extends CI_Model
 
     public function get_file_aplikasi($id)
     {
-        $query = $this->db->get_where('file_aplikasi', ['ta_id' => $id])->row();
+        $query = $this->db->get_where('file_aplikasi', ['user_id' => $this->session->userdata('id')])->row_array();
         var_dump($query);
         return $query;
     }

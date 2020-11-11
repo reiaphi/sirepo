@@ -15,6 +15,7 @@ class M_mahasiswa extends CI_Model
     }
     public function input_data($data, $table)
     {
+
         $this->db->insert($table, $data);
     }
 
@@ -39,9 +40,10 @@ class M_mahasiswa extends CI_Model
     }
 
     // Fungsi untuk melakukan proses upload file
-    public function upload()
+    public function upload($nama_file)
     {
         $config['upload_path'] = './uploads/';
+        $config['file_name'] = $nama_file;
         $config['allowed_types'] = 'pdf|text';
         $config['max_size']  = '2048';
         $config['remove_space'] = TRUE;
@@ -87,13 +89,13 @@ class M_mahasiswa extends CI_Model
         return array_shift($q);
     }
     // Fungsi untuk menyimpan data ke database
-    public function save($upload)
+    public function save($upload, $kategori)
     {
         $file = $this->get_id();
         $data = array(
 
             'name' => $upload['file']['file_name'],
-            'file' => "none",
+            'kategori' => $kategori,
             'status' => 1,
             'ta_id' => $file['id'],
             'user_id' => $this->session->userdata('id')

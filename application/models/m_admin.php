@@ -21,7 +21,17 @@ class M_admin extends CI_Model
     {
         $this->db->where($where);
         $this->db->delete($table);
+        $this->hapus_tabel('mahasiswa');
+        $this->hapus_tabel('file');
+        $this->hapus_tabel('tugas_akhir');
     }
+    private function hapus_tabel($table)
+    {
+        $where = array('user_id' => $this->session->userdata('id'));
+        $this->db->where($where);
+        $this->db->delete($table);
+    }
+
     public function edit_data($where, $table)
     {
         return $this->db->get_where($table, $where);
@@ -119,5 +129,30 @@ class M_admin extends CI_Model
     {
 
         return $this->db->get_where('mahasiswa', ['id' => $id])->row();
+    }
+    function getRows($params = array())
+    {
+        $this->db->select('*');
+        $this->db->from('file_aplikasi');
+        //nanti diubah kalau status sudah diganti yaa
+
+        if (array_key_exists('name', $params) && !empty($params['name'])) {
+            $this->db->where('name', $params['name']);
+            //get records
+            $query = $this->db->get();
+            $result = ($query->num_rows() > 0) ? $query->row_array() : FALSE;
+        } else {
+            //set start and limit
+            if (array_key_exists("start", $params) && array_key_exists("limit", $params)) {
+                $this->db->limit($params['limit'], $params['start']);
+            } elseif (!array_key_exists("start", $params) && array_key_exists("limit", $params)) {
+                $this->db->limit($params['limit']);
+            }
+            //get records
+            $query = $this->db->get();
+            $result = ($query->num_rows() > 0) ? $query->result_array() : FALSE;
+        }
+        //return fetched data
+        return $result;
     }
 }

@@ -1,5 +1,5 @@
 <!-- Footer -->
-<footer class="sticky-footer" style="background-color: #f0f1f3;">
+<footer class="sticky-footer fixed-bottom" style="background-color: #f0f1f3;">
     <div class="container my-auto">
         <div class="copyright text-center my-auto">
             <span>Copyright &copy; Sistem Repositori 2020</span>

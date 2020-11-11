@@ -67,23 +67,26 @@ class Publik extends CI_Controller
     {
         redirect('auth');
     }
+
     public function section1($id)
     {
         //$where = array('user_id' => $this->session->userdata('id'));
         $data = array();
         //$data['tugas_akhir'] = $this->m_publik->get_detail($id);
         $data['file'] = $this->m_publik->get_file($id);
+        $data['file_aplikasi'] = $this->m_publik->get_link_port($id);
         $data['tugas_akhir'] = $this->m_publik->show_ta($id);
-        $this->load->view('publik/header.php');
-        $this->load->view('publik/section1.php', $data);
+        $this->load->view('publik/header.php', $data);
+        $this->load->view('publik/section1.php');
         $this->load->view('publik/footer.php');
     }
 
     public function demo($id)
     {
         //$where = array('user_id' => $this->session->userdata('id'));
-        $data['file_aplikasi'] = $this->m_publik->get_file_aplikasi($id);
-        $this->load->view('publik/demo.php', $data);
+        $data['link_port'] = $this->m_publik->get_file_aplikasi($id);
+        //$this->load->view('publik/demo.php', $data);
+        redirect("http://localhost/");
     }
     public function get_filename($id)
     {

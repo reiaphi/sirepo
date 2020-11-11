@@ -47,15 +47,20 @@
             <div class="row text-center m-3">
                 <div class="col">
                     <ul class="list-group text-left m-3">
-                        <?php foreach ($file as $files) :
-                        ?>
-                            <li class="list-group-item">
-                                <?php
-                                echo $files['name'];
-                                ?>
-                            </li>
-                        <?php endforeach;
-                        ?>
+                        <?php if (is_array($file) || is_object($file)) : ?>
+                            <?php foreach ($file as $files) :                                ?>
+                                <?php if ($files && $files['status'] != '2') : ?>
+                                    <?php if (count($files) < 7 || isset($file) == null) : ?>
+                                        <li class="list-group-item">
+                                            <?= $files['name']; ?>
+
+                                            <a href="<?php echo base_url('publik/preview/') .  $files['id']; ?>"> <i class=" fas fa-fw fa-eye"></i></a>
+                                        </li>
+                                    <?php endif; ?>
+                                <?php endif; ?>
+                            <?php endforeach;
+                            ?>
+                        <?php endif; ?>
                     </ul>
                 </div>
                 <div class="col align-items-end">

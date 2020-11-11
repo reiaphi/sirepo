@@ -26,70 +26,147 @@
                         </div>
                     <?php endif; ?>
                     <div class="card-body ">
-                        <form id="yourFormId" name="yourFormId" action="<?= base_url() . 'mahasiswa/insert_to_mahasiswa'; ?>" method="POST">
-                            <div class="form-group row">
-                                <label for="nim" class="col-sm-2 col-form-label">NIM</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="nim" name="nim" placeholder="NIM Lengkap">
+                        <?php if (isset($mahasiswa) == null) : ?>
+                            <form id="yourFormId" name="yourFormId" action="<?= base_url() . 'mahasiswa/insert_to_mahasiswa'; ?>" method="POST">
+                                <div class="form-group row">
+                                    <label for="nim" class="col-sm-2 col-form-label">NIM</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="nim" name="nim" placeholder="NIM Lengkap">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class=" form-group row">
-                                <label for="name" class="col-sm-2 col-form-label">Nama Lengkap</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="name" name="name" placeholder="Nama lengkap">
+                                <div class=" form-group row">
+                                    <label for="name" class="col-sm-2 col-form-label">Nama Lengkap</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="name" name="name" placeholder="Nama lengkap">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="email" class="col-sm-2 col-form-label">Email</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="email" name="email" placeholder="example@gmail.com">
+                                <div class="form-group row">
+                                    <label for="email" class="col-sm-2 col-form-label">Email</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="email" name="email" placeholder="example@gmail.com">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="fakultas" class="col-sm-2 col-form-label">Fakultas</label>
-                                <div class="col-sm-10">
+                                <div class="form-group row">
+                                    <label for="fakultas" class="col-sm-2 col-form-label">Fakultas</label>
+                                    <div class="col-sm-10">
 
-                                    <select class="custom-select mr-sm-2" id="fakultas" name="fakultas">
-                                        <option selected>Choose...</option>
-                                        <option value="Matematika dan Ilmu Alam">Mipa</option>
+                                        <select class="custom-select mr-sm-2" id="fakultas" name="fakultas">
+                                            <option selected>Choose...</option>
+                                            <option value="Matematika dan Ilmu Alam">Mipa</option>
 
-                                    </select>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="program_studi" class="col-sm-2 col-form-label">Program Studi</label>
+                                    <div class="col-sm-10">
+
+                                        <select class="custom-select mr-sm-2" id="program_studi" name="program_studi" value="<?php echo $mahasiswa->program_studi; ?>">
+                                            <option selected>Choose...</option>
+                                            <option value="S1 Ilmu Komputer">Ilmu Komputer</option>
+
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="no_hp" class="col-sm-2 col-form-label">No. HP</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="no_hp" name="no_hp" placeholder="08xxxxxxxx" value="<?php echo $mahasiswa->no_hp; ?>">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="tahun" class="col-sm-2 col-form-label">Tahun</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="tahun" name="tahun" placeholder="2020" value="<?php echo $mahasiswa->name; ?>">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row ">
+                                    <button type="submit" class="btn btn-success btn-icon-split align-right">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-check"></i>
+                                        </span>
+                                        <span class="text">Simpan dan Lanjutkan</span>
+                                    </button>
+                                </div>
+                            </form>
+                        <?php endif; ?>
+                        <?php if ($mahasiswa) : ?>
+                            <!-- Tasks Card Example -->
+                            <div class="card border-left-danger mb-2 p">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        Anda Sudah pernah mengisi form ini!
+                                    </div>
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label for="program_studi" class="col-sm-2 col-form-label">Program Studi</label>
-                                <div class="col-sm-10">
 
-                                    <select class="custom-select mr-sm-2" id="program_studi" name="program_studi" value="<?php echo $mahasiswa->program_studi; ?>">
-                                        <option selected>Choose...</option>
-                                        <option value="S1 Ilmu Komputer">Ilmu Komputer</option>
+                            <form id="yourFormId" name="yourFormId" action="<?= base_url() . 'mahasiswa/insert_to_mahasiswa'; ?>" method="POST">
+                                <fieldset disabled="disabled">
+                                    <div class="form-group row">
+                                        <label for="nim" class="col-sm-2 col-form-label">NIM</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="nim" name="nim" placeholder="<?= $mahasiswa->nim; ?>">
+                                        </div>
+                                    </div>
+                                    <div class=" form-group row">
+                                        <label for="name" class="col-sm-2 col-form-label">Nama Lengkap</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="name" name="name" placeholder="Nama lengkap">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="email" class="col-sm-2 col-form-label">Email</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="email" name="email" placeholder="example@gmail.com">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="fakultas" class="col-sm-2 col-form-label">Fakultas</label>
+                                        <div class="col-sm-10">
 
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="no_hp" class="col-sm-2 col-form-label">No. HP</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="no_hp" name="no_hp" placeholder="08xxxxxxxx" value="<?php echo $mahasiswa->no_hp; ?>">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="tahun" class="col-sm-2 col-form-label">Tahun</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="tahun" name="tahun" placeholder="2020" value="<?php echo $mahasiswa->name; ?>">
-                                </div>
-                            </div>
+                                            <select class="custom-select mr-sm-2" id="fakultas" name="fakultas">
+                                                <option selected>Choose...</option>
+                                                <option value="Matematika dan Ilmu Alam">Mipa</option>
 
-                            <div class="form-group row ">
-                                <button type="submit" class="btn btn-success btn-icon-split align-right">
-                                    <span class="icon text-white-50">
-                                        <i class="fas fa-check"></i>
-                                    </span>
-                                    <span class="text">Simpan dan Lanjutkan</span>
-                                </button>
-                            </div>
-                        </form>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="program_studi" class="col-sm-2 col-form-label">Program Studi</label>
+                                        <div class="col-sm-10">
 
+                                            <select class="custom-select mr-sm-2" id="program_studi" name="program_studi" value="<?php echo $mahasiswa->program_studi; ?>">
+                                                <option selected>Choose...</option>
+                                                <option value="S1 Ilmu Komputer">Ilmu Komputer</option>
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="no_hp" class="col-sm-2 col-form-label">No. HP</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="no_hp" name="no_hp" placeholder="08xxxxxxxx" value="<?php echo $mahasiswa->no_hp; ?>">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="tahun" class="col-sm-2 col-form-label">Tahun</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="tahun" name="tahun" placeholder="2020" value="<?php echo $mahasiswa->name; ?>">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row ">
+                                        <button type="submit" class="btn btn-success btn-icon-split align-right">
+                                            <span class="icon text-white-50">
+                                                <i class="fas fa-check"></i>
+                                            </span>
+                                            <span class="text">Simpan dan Lanjutkan</span>
+                                        </button>
+                                    </div>
+                                </fieldset>
+                            </form>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
@@ -110,71 +187,83 @@
                 <!-- Card Content - Collapse -->
                 <div class="collapse show" id="collapseCardTwo" data-parent="#accordion">
                     <div class="card-body">
-                        <form action="<?= base_url() . 'mahasiswa/insert_to_tugas_akhir'; ?>" method="POST">
-                            <div class="form-group row">
-                                <div class="input-group my-2">
-                                    <div class="col col-lg-2">
-                                        <div class="input-group-prepend">
-                                            <span class="text">Judul</span>
-                                        </div>
+                        <?php if ($mahasiswa) : ?>
+                            <!-- Tasks Card Example -->
+                            <div class="card border-left-danger mb-2 p">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        Anda Sudah pernah mengisi form ini! Silakan lihat di bagian "Tugas Akhir saya".
                                     </div>
-                                    <div class="col">
-                                        <input type="text" id="judul" name="judul" class="form-control"></input>
-                                    </div>
-                                </div>
-
-                                <div class="input-group my-2">
-                                    <div class="col col-lg-2">
-                                        <div class="input-group-prepend">
-                                            <span class="text">Abstrak/Intisari</span>
-                                        </div>
-                                    </div>
-                                    <div class="col">
-
-                                        <textarea class="form-control" name="intisari" aria-label="With textarea" style="height: 300px;"></textarea>
-                                    </div>
-                                </div>
-                                <div class="input-group my-2">
-                                    <div class="col col-lg-2">
-                                        <div class="input-group-prepend">
-                                            <span class="text">Abstract</span>
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <textarea class="form-control" name="abstract" aria-label="With textarea" style="height: 300px;"></textarea>
-                                    </div>
-                                </div>
-                                <div class="input-group my-2">
-                                    <div class="col col-lg-2">
-                                        <div class="input-group-prepend">
-                                            <span class="text">Pembimbing</span>
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <input type="text" name="pembimbing" class="form-control"></input>
-                                    </div>
-                                </div>
-                                <div class="input-group my-2">
-                                    <div class="col col-lg-2">
-                                        <div class="input-group-prepend">
-                                            <span class="text">Kata Kunci</span>
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <input type="text" name="kata_kunci" class="form-control"></input>
-                                    </div>
-                                </div>
-
-                                <div class="form-group row m-3 ">
-                                    <button type="submit" class="btn btn-success btn-icon-split align-right">
-                                        <span class="icon text-white-50">
-                                            <i class="fas fa-check"></i>
-                                        </span>
-                                        <span class="text">Simpan dan Lanjutkan</span>
-                                    </button>
                                 </div>
                             </div>
-                        </form>
+                        <?php endif; ?>
+                        <?php if (isset($ta_saya) == null) : ?>
+                            <form action="<?= base_url() . 'mahasiswa/insert_to_tugas_akhir'; ?>" method="POST">
+                                <div class="form-group row">
+                                    <div class="input-group my-2">
+                                        <div class="col col-lg-2">
+                                            <div class="input-group-prepend">
+                                                <span class="text">Judul</span>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <input type="text" id="judul" name="judul" class="form-control"></input>
+                                        </div>
+                                    </div>
+
+                                    <div class="input-group my-2">
+                                        <div class="col col-lg-2">
+                                            <div class="input-group-prepend">
+                                                <span class="text">Abstrak/Intisari</span>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+
+                                            <textarea class="form-control" name="intisari" aria-label="With textarea" style="height: 300px;"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="input-group my-2">
+                                        <div class="col col-lg-2">
+                                            <div class="input-group-prepend">
+                                                <span class="text">Abstract</span>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <textarea class="form-control" name="abstract" aria-label="With textarea" style="height: 300px;"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="input-group my-2">
+                                        <div class="col col-lg-2">
+                                            <div class="input-group-prepend">
+                                                <span class="text">Pembimbing</span>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <input type="text" name="pembimbing" class="form-control"></input>
+                                        </div>
+                                    </div>
+                                    <div class="input-group my-2">
+                                        <div class="col col-lg-2">
+                                            <div class="input-group-prepend">
+                                                <span class="text">Kata Kunci</span>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <input type="text" name="kata_kunci" class="form-control"></input>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row m-3 ">
+                                        <button type="submit" class="btn btn-success btn-icon-split align-right">
+                                            <span class="icon text-white-50">
+                                                <i class="fas fa-check"></i>
+                                            </span>
+                                            <span class="text">Simpan dan Lanjutkan</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
@@ -205,25 +294,40 @@
                                 <p>file yang sudah terunggah:</p>
                                 <?php if (is_array($file) || is_object($file)) : ?>
                                     <?php foreach ($file as $files) :                                ?>
-                                        <li class="list-group-item">
-                                            <?php if ($files) {
-                                                echo $files['name'];
-                                            }
-                                            ?>
-                                            <a href="<?php echo base_url('publik/preview/') .  $files['id']; ?>"> <i class=" fas fa-fw fa-eye"></i></a>
-                                        <?php endforeach;
-                                        ?>
-                                    <?php endif; ?>
+                                        <?php if ($files && $files['status'] != '2') : ?>
+                                            <?php if (count($files) < 7 || isset($file) == null) : ?>
+                                                <li class="list-group-item">
+                                                    <?= $files['name']; ?>
+
+                                                    <a href="<?php echo base_url('publik/preview/') .  $files['id']; ?>"> <i class=" fas fa-fw fa-eye"></i></a>
+                                                </li>
+                                            <?php endif; ?>
+                                        <?php endif; ?>
+                                    <?php endforeach;
+                                    ?>
+                                <?php endif; ?>
 
                             </ul>
                         </div>
                         <div class="row ">
-                            <a href="#" class="btn btn-info btn-icon-split m-3" data-toggle="modal" data-target="#addUser">
-                                <span class="icon text-white-50">
-                                    <i class="fas fa-plus"></i>
-                                </span>
-                                <span class="text">Tambah File</span>
-                            </a>
+
+                            <?php if (is_array($file) || is_object($file)) : ?>
+                                <?php $x = 0; ?>
+                                <?php foreach ($file as $files) :                                ?>
+                                    <?php if ($files && $files['status'] != '2') : ?>
+                                        <?php $x++; ?>
+                                    <?php endif; ?>
+                                <?php endforeach;
+                                ?>
+                                <?php if ($x < 7) : ?>
+                                    <a href="#" class="btn btn-info btn-icon-split m-3" data-toggle="modal" data-target="#addUser">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-plus"></i>
+                                        </span>
+                                        <span class="text">Tambah File</span>
+                                    </a>
+                                <?php endif; ?>
+                            <?php endif; ?>
                             <!-- Modal -->
                             <div class="modal fade" id="addUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
@@ -239,11 +343,15 @@
                                             <?php echo form_open("mahasiswa/insert_to_file_laporan", array('enctype' => 'multipart/form-data')); ?>
                                             <div class="form-group">
                                                 <label>Kategori</label>
-                                                <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+                                                <select name="kategori" class="custom-select mr-sm-2" id="inlineFormCustomSelect">
                                                     <option selected>Choose...</option>
-                                                    <option value="1">One</option>
-                                                    <option value="2">Two</option>
-                                                    <option value="3">Three</option>
+                                                    <option value="1">Halaman Judul</option>
+                                                    <option value="2">Abstak/Intisari & Abstact</option>
+                                                    <option value="3">Daftar Isi</option>
+                                                    <option value="4">Pendahuluan</option>
+                                                    <option value="5">Penutup</option>
+                                                    <option value="6">Daftar Pustaka</option>
+                                                    <option value="7">Fulltext</option>
                                                 </select>
                                             </div>
                                             <div class="form-group">

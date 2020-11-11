@@ -1,8 +1,8 @@
 <!-- Footer -->
-<footer class="sticky-footer bg-white">
+<footer class="sticky-footer bg-white position-relative">
   <div class="container my-auto">
     <div class="copyright text-center my-auto">
-      <span>Copyright &copy; Your Website 2019</span>
+      <span>Copyright &copy; Sistem Repositori 2020</span>
     </div>
   </div>
 </footer>

@@ -120,18 +120,6 @@ class Admin extends CI_Controller
 		$where = array('id' => $id);
 		$this->m_admin->hapus_data($where, 'user');
 	}
-	public function data_laporan($id)
-	{
-		$data = array();
-		$data['title'] = 'Administrator';
-		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
-		$data['file_laporan'] = $this->m_admin->get_file($id);
-		$data['mahasiswa'] = $this->m_admin->get_mhs($id);
-		$this->load->view('admin/header.php', $data);
-		$this->load->view('admin/sidebar.php');
-		$this->load->view('admin/data_laporan.php');
-		$this->load->view('admin/footer');
-	}
 
 	public function action_ta($id)
 	{
@@ -150,24 +138,29 @@ class Admin extends CI_Controller
 			redirectPreviousPage();
 		}
 	}
-	public function action_file($id)
-	{
-		if ($_POST['action'] == 'aprove') {
-			$kategori = $this->input->post('kategori_file');
-			$data = array(
-				'status' => '3',
-				'file' => $kategori
 
-			);
-			$where = array(
-				'id' => $id
-			);
-			$this->m_admin->update_data($where, $data, 'file');
-			redirectPreviousPage();
-		} elseif ($_POST['action'] == 'declined') {
-			$this->db->delete('file', array('id' => $id));
-			redirectPreviousPage();
-		}
+	public function aprove_file($id)
+	{
+		$data = array(
+			'status' => '3'
+		);
+
+		$this->db->update('file', $data, array('id' => $id));
+		redirectPreviousPage();
+	}
+	public function decline_file($id)
+	{
+		$data = array(
+			'status' => '2'
+
+
+		);
+		$where = array(
+			'id' => $id
+		);
+
+		$this->m_admin->update_data($where, $data, 'file');
+		redirectPreviousPage();
 	}
 	public function send_email($id)
 	{
@@ -186,17 +179,65 @@ class Admin extends CI_Controller
 		$config['newline'] = "\r\n";
 		$config['wordwrap'] = TRUE;
 		$this->email->initialize($config);
-		$data = $this->db->get_where('mahasiswa', ['id' => $id])->row();
+		$data['mahasiswa'] = $this->db->get_where('mahasiswa', ['id' => $id])->row();
+		$data['message'] = $_POST['messageEmail'];
 		$this->load->library('email');
 		$this->email->set_newline("\r\n");
 		$this->email->from('sitish272@gmail.com', 'Admin Re:Code');
-		$this->email->to($data->email);
+		$this->email->to($data['mahasiswa']->email);
 		$this->email->subject('Percobaan email');
-		$this->email->message('Petugas kami telah melakukan verifikasi terhadap data yang ada unggah dan menemukan beberapa hal yang harus anda perbaiki. silakan kunjungi http://...');
+		$this->email->message($data['message']);
 		if (!$this->email->send()) {
 			show_error($this->email->print_debugger());
 		} else {
 			echo 'Success to send email';
 		}
+	}
+	public function download($id)
+	{
+
+		//get file info from database
+		$fileInfo =  $this->m_admin->getRows(array('name' => $id));
+		//file path
+		$filename = $fileInfo['name'] ?? 'default value';
+		$filepath = 'C:\xampp\htdocs\repositori\uploads\file_aplikasi/' . $fileInfo['name'];
+		$data = file_get_contents($filepath);
+		//download file from directory
+		$mime = get_mime_by_extension($filepath);
+		header('Content-Type: ' . $mime);  // Add the mime type from Code igniter.
+
+		return force_download($filename, $data);
+	}
+	public function update_port_app($id)
+	{
+		$data = array(
+			'status' => '3',
+			'port' => $this->input->post('port')
+
+		);
+		$where = array(
+			'id' => $id
+		);
+
+
+		$this->m_admin->update_data($where, $data, 'file_aplikasi');
+		$this->session->set_flashdata('File Aplikasi', 'Berhasil diupdate');
+		redirectPreviousPage();
+	}
+	public function update_note_app($id)
+	{
+		$data = array(
+
+			'notes' => $this->input->post('note')
+
+		);
+		$where = array(
+			'id' => $id
+		);
+
+
+		$this->m_admin->update_data($where, $data, 'file_aplikasi');
+		$this->session->set_flashdata('File Aplikasi', 'Berhasil diupdate');
+		redirectPreviousPage();
 	}
 }

@@ -71,7 +71,7 @@
                                             <a href="3" class="btn btn-info btn-circle btn-sm">
                                                 <i class="fas fa-pen"></i>
                                             </a>
-                                            <a onclick="javascript: return confirm('Anda yakin hapus?') " href="<?= base_url('admin/delete/') . $data->id; ?>" class="btn btn-danger btn-circle btn-sm">
+                                            <a onclick="javascript: return confirm('Anda yakin hapus? semua data yang bersangkutan dengan mahasiswa <?= $data->username; ?> akan terhapus') " href="<?= base_url('admin/delete/') . $data->id; ?>" class="btn btn-danger btn-circle btn-sm">
                                                 <i class="fas fa-trash"></i>
                                             </a>
                                         </td>
